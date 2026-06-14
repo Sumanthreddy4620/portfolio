@@ -1,4 +1,5 @@
 import React from 'react'
+import { Analytics } from "@vercel/analytics/next"
 import Navbar from "./sections/Navbar.jsx";
 import Hero from "./sections/Hero.jsx";
 import Particles from "./sections/Particles.jsx";
@@ -30,6 +31,7 @@ const App = () => {
                 <Contact />
                 <Footer />
             </div>
+            <Analytics />
         </main>
     )
 }
