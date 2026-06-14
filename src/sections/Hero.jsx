@@ -10,11 +10,17 @@ import { calculateSizes } from "../constants/index.js";
 
 const KeyBoardWrapper = ({ scale, position, rotation }) => {
     const ref = useRef();
+    const isTouchDevice = useMediaQuery({ maxWidth: 1024 });
 
     useFrame(({ mouse }) => {
         if (ref.current) {
-            ref.current.rotation.y = rotation[1] + mouse.x * 0.1;
-            ref.current.rotation.x = rotation[0] + (-mouse.y * 0.1);
+            if (isTouchDevice) {
+                ref.current.rotation.y = rotation[1];
+                ref.current.rotation.x = rotation[0];
+            } else {
+                ref.current.rotation.y = rotation[1] + mouse.x * 0.1;
+                ref.current.rotation.x = rotation[0] + (-mouse.y * 0.1);
+            }
         }
     });
 
