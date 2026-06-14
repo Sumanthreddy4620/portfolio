@@ -3,6 +3,7 @@ import { PerspectiveCamera } from "@react-three/drei";
 import KeyBoard from "../components/KeyBoard.jsx";
 import { Suspense, useRef } from "react";
 import CanvasLoader from "../components/CanvasLoader.jsx";
+import { motion } from "framer-motion";
 // import { Leva, useControls } from "leva";
 import { useMediaQuery } from "react-responsive";
 import { calculateSizes } from "../constants/index.js";
@@ -60,6 +61,25 @@ const Hero = () => {
                         <directionalLight position={[10, 10, 10]} intensity={0.5} />
                     </Suspense>
                 </Canvas>
+                <div className="absolute bottom-8 w-full flex justify-center items-center gap-4">
+                    <div className="h-[1px] w-16 sm:w-32 bg-white-500 opacity-30" />
+                    <a href='#about'>
+                        <div className="w-[18px] h-[32px] sm:w-[22px] sm:h-[40px] rounded-full border-2 border-white-500 flex justify-center items-start p-1 overflow-hidden">
+                            <motion.div
+                                initial={{ y: 2 }}
+                                animate={{ y: 16 }}
+                                transition={{
+                                    duration: 3,
+                                    repeat: Infinity,
+                                    repeatType: 'mirror',
+                                    ease: 'easeInOut',
+                                }}
+                                className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white-500"
+                            />
+                        </div>
+                    </a>
+                    <div className="h-[1px] w-16 sm:w-32 bg-white-500 opacity-30" />
+                </div>
             </div>
         </section>
     );

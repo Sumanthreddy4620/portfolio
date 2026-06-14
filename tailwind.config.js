@@ -8,6 +8,7 @@ export default {
         publicsans: ['Public Sans', 'sans-serif'],
       },
       colors: {
+        secondary: '#FFFFFF',
         black: {
           DEFAULT: '#000',
           100: '#010103',
