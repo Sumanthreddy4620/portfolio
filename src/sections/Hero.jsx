@@ -27,68 +27,71 @@ const KeyBoardWrapper = ({ scale, position, rotation }) => {
     return <KeyBoard ref={ref} scale={scale} position={position} rotation={rotation} />;
 };
 
-const Hero = () => {
-    const isSmall = useMediaQuery({ maxWidth: 440 });
-    const isMobile = useMediaQuery({ maxWidth: 768 });
-    const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
-    const sizes = calculateSizes(isSmall, isMobile, isTablet);
+    const Hero = () => {
+        const isSmall = useMediaQuery({ maxWidth: 440 });
+        const isMobile = useMediaQuery({ maxWidth: 768 });
+        const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
+        const sizes = calculateSizes(isSmall, isMobile, isTablet);
 
-    // const x = useControls('KeyBoard', {
-    //     positionX: { value: 5.0, min: -10, max: 10 },
-    //     positionY: { value: -3.5, min: -10, max: 10 },
-    //     positionZ: { value: 2.9, min: -10, max: 10 },
-    //     rotationX: { value: -2.1, min: -10, max: 10 },
-    //     rotationY: { value: 3.7, min: -10, max: 10 },
-    //     rotationZ: { value: 3.3, min: -10, max: 10 },
-    //     scale: { value: 0.4, min: 0.1, max: 2 },
-    // });
+        // const x = useControls('KeyBoard', {
+        //     positionX: { value: 5.0, min: -10, max: 10 },
+        //     positionY: { value: -3.5, min: -10, max: 10 },
+        //     positionZ: { value: 2.9, min: -10, max: 10 },
+        //     rotationX: { value: -2.1, min: -10, max: 10 },
+        //     rotationY: { value: 3.7, min: -10, max: 10 },
+        //     rotationZ: { value: 3.3, min: -10, max: 10 },
+        //     scale: { value: 0.4, min: 0.1, max: 2 },
+        // });
 
-    return (
-        <section className="min-h-screen w-full flex flex-col relative overflow-hidden" id="home">
-            <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3">
-                <p className="sm:text-3xl text-2xl font-medium text-white text-center font-generalsans" style={{zIndex : 20}}>
-                    Hi, I am Sumanth <span className="waving-hand">👋</span>
-                </p>
-                <p className="hero_tag text-gray_gradient">
-                    I build things that look good and work better.
-                </p>
-            </div>
-            <div className="w-full h-full absolute inset-0">
-                {/*<Leva />*/}
-                <Canvas>
-                    <Suspense fallback={<CanvasLoader />}>
-                        <PerspectiveCamera makeDefault position={[0, 0, 20]} />
-                        <KeyBoardWrapper
-                            scale={sizes.deskScale}
-                            position={sizes.deskPosition}
-                            rotation={[-2.1, 3.7, 3.3]}
-                        />
-                        <ambientLight intensity={1} />
-                        <directionalLight position={[10, 10, 10]} intensity={0.5} />
-                    </Suspense>
-                </Canvas>
-                <div className="absolute bottom-8 w-full flex justify-center items-center gap-4">
-                    <div className="h-[1px] w-16 sm:w-32 bg-white-500 opacity-30" />
+        return (
+            <section className="min-h-screen w-full flex flex-col relative overflow-hidden" id="home">
+                <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3">
+                    <p className="sm:text-3xl text-2xl font-medium text-white text-center font-generalsans" style={{zIndex : 20}}>
+                        Hi, I am Sumanth <span className="waving-hand">👋</span>
+                    </p>
+                    <p className="hero_tag text-gray_gradient">
+                        I build things that look good and work better.
+                    </p>
+                </div>
+
+                {/* Canvas stays full-bleed behind everything */}
+                <div className="w-full h-full absolute inset-0">
+                    <Canvas>
+                        <Suspense fallback={<CanvasLoader />}>
+                            <PerspectiveCamera makeDefault position={[0, 0, 20]} />
+                            <KeyBoardWrapper
+                                scale={sizes.deskScale}
+                                position={sizes.deskPosition}
+                                rotation={[-2.1, 3.7, 3.3]}
+                            />
+                            <ambientLight intensity={1} />
+                            <directionalLight position={[10, 10, 10]} intensity={0.5} />
+                        </Suspense>
+                    </Canvas>
+                </div>
+
+                {/* Pill is now a sibling to Canvas div, anchored to the section via z-10 */}
+                <div className="absolute bottom-8 w-full flex justify-center items-center gap-4 z-10">
+                    <div className="h-[1px] w-16 sm:w-24 md:w-32 bg-white-500 opacity-30" />
                     <a href='#about'>
-                        <div className="w-[18px] h-[32px] sm:w-[22px] sm:h-[40px] rounded-full border-2 border-white-500 flex justify-center items-start p-1 overflow-hidden">
+                        <div className="w-[16px] h-[28px] sm:w-[18px] sm:h-[32px] md:w-[20px] md:h-[36px] rounded-full border-2 border-white-500 flex justify-center items-start p-1 overflow-hidden">
                             <motion.div
                                 initial={{ y: 2 }}
-                                animate={{ y: 16 }}
+                                animate={{ y: 12 }}
                                 transition={{
                                     duration: 3,
                                     repeat: Infinity,
                                     repeatType: 'mirror',
                                     ease: 'easeInOut',
                                 }}
-                                className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white-500"
+                                className="w-1 h-1 rounded-full bg-white-500"
                             />
                         </div>
                     </a>
-                    <div className="h-[1px] w-16 sm:w-32 bg-white-500 opacity-30" />
+                    <div className="h-[1px] w-16 sm:w-24 md:w-32 bg-white-500 opacity-30" />
                 </div>
-            </div>
-        </section>
-    );
-};
+            </section>
+        );
+    };
 
 export default Hero;
