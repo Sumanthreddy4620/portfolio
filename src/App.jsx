@@ -1,5 +1,6 @@
 import React from 'react'
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Navbar from "./sections/Navbar.jsx";
 import Hero from "./sections/Hero.jsx";
 import Particles from "./sections/Particles.jsx";
@@ -32,6 +33,7 @@ const App = () => {
                 <Footer />
             </div>
             <Analytics />
+            <SpeedInsights />
         </main>
     )
 }
