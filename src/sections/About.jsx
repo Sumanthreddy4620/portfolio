@@ -88,7 +88,7 @@ const About = () => {
                         <div>
                             <p className="grid-headtext">Hi, I'm Sumanthreddy Kasireddy</p>
                             <p className="grid-subtext">
-                                I'm a Computer Science student passionate about building modern web experiences. I enjoy turning ideas into fast, responsive, and visually engaging applications that solve real-world problems.
+                                Computer Science student focused on Full-Stack Development, React applications, and interactive web experiences.
                             </p>
                         </div>
                     </GridCard>
