@@ -110,7 +110,6 @@ const Hero = () => {
                 </Canvas>
             </div>
 
-            {/* Pill is now a sibling to Canvas div, anchored to the section via z-10 */}
             <div className="absolute bottom-8 w-full flex justify-center items-center gap-4 z-10">
                 <div className="h-[1px] w-16 sm:w-24 md:w-32 bg-white-500 opacity-30" />
                 <a href='#about'>
@@ -128,7 +127,7 @@ const Hero = () => {
                         />
                     </div>
                 </a>
-                <div className="h-[1px] w-16 sm:w-24 md:w-32 bg-white-700 opacity-50" />
+                <div className="h-[1px] w-16 sm:w-24 md:w-32 bg-white-500 opacity-30" />
             </div>
         </section>
     );

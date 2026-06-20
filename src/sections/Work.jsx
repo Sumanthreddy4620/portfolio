@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import BorderGlow from '../components/ui/BorderGlow';
 import { projects } from '../constants/index.js';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/all';
+import gsap from 'gsap';
 
 const Work = () => {
     const [current, setCurrent] = useState(0);
@@ -8,13 +11,56 @@ const Work = () => {
     const prev = () => setCurrent(i => Math.max(0, i - 1));
     const next = () => setCurrent(i => Math.min(projects.length - 1, i + 1));
 
+    useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Title animates in first
+        gsap.from('.work-title', {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            ease: 'power1.inOut',
+            scrollTrigger: {
+                trigger: '#work',
+                start: 'top 80%',
+                toggleActions: 'play none none none',
+            },
+        });
+
+        // Carousel animates in after title
+        gsap.from('.work-carousel', {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            ease: 'power1.inOut',
+            scrollTrigger: {
+                trigger: '.work-carousel',
+                start: 'top 90%',
+                toggleActions: 'play none none none',
+            },
+        });
+
+        // Nav dots + arrows animate in last
+        gsap.from('.work-nav', {
+            opacity: 0,
+            y: 20,
+            duration: 0.8,
+            ease: 'power1.inOut',
+            scrollTrigger: {
+                trigger: '.work-nav',
+                start: 'top 95%',
+                toggleActions: 'play none none none',
+            },
+        });
+    });
+
     return (
         <section className="w-full py-20 c-space" id="work">
-            <h1 className="sm:text-3xl text-2xl font-semibold text-white text-center font-generalsans mb-12">
+            <h1 className="work-title sm:text-3xl text-2xl font-semibold text-white text-center font-generalsans mb-12">
                 Projects ShowCase
             </h1>
 
-            <div className="relative max-w-5xl mx-auto px-2 py-6">
+            <div className="work-carousel relative max-w-5xl mx-auto px-2 py-6">
 
                 <div style={{ overflow: 'clip' }}>
                     <div
@@ -66,7 +112,7 @@ const Work = () => {
                     </div>
                 </div>
 
-                <div className="flex items-center justify-center gap-4 mt-2">
+                <div className="work-nav flex items-center justify-center gap-4 mt-2">
                     <button
                         onClick={prev}
                         disabled={current === 0}

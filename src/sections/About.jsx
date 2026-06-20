@@ -58,19 +58,21 @@ const About = () => {
     useGSAP(() => {
         gsap.registerPlugin(SplitText, ScrollTrigger);
 
-        const scrollTimeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: '#about',
-                start: 'top center',
-            }
-        });
-
-        scrollTimeline.from('.about-card', {
-            opacity: 0,
-            y: 50,
-            duration: 1,
-            ease: 'power1.inOut',
-            stagger: 0.1,
+        // Each card gets its own ScrollTrigger so it fires
+        // exactly when that card enters the viewport —
+        // works perfectly on mobile where cards stack vertically
+        document.querySelectorAll('.about-card').forEach((card) => {
+            gsap.from(card, {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: 'power1.inOut',
+                scrollTrigger: {
+                    trigger: card,        // each card is its own trigger
+                    start: 'top 90%',     // fires when top of card hits 90% of viewport
+                    toggleActions: 'play none none none',
+                },
+            });
         });
     });
 
