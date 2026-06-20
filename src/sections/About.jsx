@@ -1,6 +1,9 @@
 import { useState, useRef } from 'react';
 import Globe from 'react-globe.gl';
 import Button from '../components/Button.jsx';
+import { SplitText, ScrollTrigger } from 'gsap/all';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 const GridCard = ({ children, spotX, spotY, color, gridRef, isInGrid }) => {
     const cardRef = useRef(null);
@@ -52,6 +55,25 @@ const About = () => {
     const [isInGrid, setIsInGrid] = useState(false);
     const gridRef = useRef(null);
 
+    useGSAP(() => {
+        gsap.registerPlugin(SplitText, ScrollTrigger);
+
+        const scrollTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#about',
+                start: 'top center',
+            }
+        });
+
+        scrollTimeline.from('.about-card', {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            ease: 'power1.inOut',
+            stagger: 0.1,
+        });
+    });
+
     const handleCopy = () => {
         navigator.clipboard.writeText('k.sumanthreddy4620@gmail.com');
         setHasCopied(true);
@@ -72,7 +94,6 @@ const About = () => {
                 onMouseLeave={() => setIsInGrid(false)}
                 className="relative grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full"
             >
-                {/* Shared background glow */}
                 <div
                     className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
                     style={{
@@ -82,7 +103,7 @@ const About = () => {
                 />
 
                 {/* Card 1 */}
-                <div className="col-span-1 xl:row-span-3 relative z-10">
+                <div className="about-card col-span-1 xl:row-span-3 relative z-10">
                     <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
                         <img src="assets/grid1.png" alt="grid-1" className="w-full sm:h-[276px] h-fit object-contain" />
                         <div>
@@ -95,7 +116,7 @@ const About = () => {
                 </div>
 
                 {/* Card 2 */}
-                <div className="col-span-1 xl:row-span-3 relative z-10">
+                <div className="about-card col-span-1 xl:row-span-3 relative z-10">
                     <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
                         <img src="assets/grid2.png" alt="grid-2" className="w-full sm:h-[276px] h-fit object-contain" />
                         <div>
@@ -108,7 +129,7 @@ const About = () => {
                 </div>
 
                 {/* Card 3 - Globe */}
-                <div className="col-span-1 xl:row-span-4 relative z-10">
+                <div className="about-card col-span-1 xl:row-span-4 relative z-10">
                     <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
                         <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center">
                             <Globe
@@ -132,7 +153,7 @@ const About = () => {
                 </div>
 
                 {/* Card 4 */}
-                <div className="xl:col-span-2 xl:row-span-3 relative z-10">
+                <div className="about-card xl:col-span-2 xl:row-span-3 relative z-10">
                     <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
                         <img src="assets/grid3.png" alt="grid-3" className="w-full sm:h-[266px] h-fit object-contain" />
                         <div>
@@ -145,7 +166,7 @@ const About = () => {
                 </div>
 
                 {/* Card 5 - Email */}
-                <div className="xl:col-span-1 xl:row-span-2 relative z-10">
+                <div className="about-card xl:col-span-1 xl:row-span-2 relative z-10">
                     <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
                         <img
                             src="assets/grid4.png"

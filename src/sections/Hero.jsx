@@ -40,9 +40,9 @@ const Hero = () => {
             rotateX: 90,
             opacity: 0,
             transformOrigin: 'top center',
-            duration: 0.8,
+            duration: 1.2,
             ease: 'expo.out',
-            stagger: 0.15,
+            stagger: 0.25,
         });
 
         const nameSplit = new SplitText('.name-text', { type: 'chars' });
@@ -51,10 +51,10 @@ const Hero = () => {
             scale: 0,
             opacity: 0,
             transformOrigin: 'bottom center',
-            duration: 0.6,
+            duration: 0.9,
             ease: 'elastic.out(1, 0.5)',
-            stagger: 0.05,
-            delay: 0.6,
+            stagger: 0.08,
+            delay: 1,
         });
     });
 
