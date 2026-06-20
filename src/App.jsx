@@ -1,4 +1,5 @@
-import React from 'react'
+import gsap from 'gsap';
+import {ScrollTrigger,SplitText} from "gsap/all";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import Navbar from "./sections/Navbar.jsx";
@@ -8,6 +9,9 @@ import Work from "./sections/Work.jsx";
 import About from "./sections/About.jsx";
 import Contact from "./sections/Contact.jsx";
 import Footer from "./sections/Footer.jsx";
+
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
 const App = () => {
     return (
         <main className="relative w-full">
