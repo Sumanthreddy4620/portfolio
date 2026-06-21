@@ -23,6 +23,7 @@ export const navLinks = [
 export const projects = [
     {
         title: "Velvet Pour",
+        url: "https://mojito-velvetpour.vercel.app",
         description:
             "A premium cocktail landing page built with React, GSAP, and Tailwind CSS. Featuring cinematic animations, smooth scrolling interactions, elegant typography, and immersive visual storytelling inspired by modern beverage brands.",
         tags: ["React", "GSAP", "Tailwind CSS", "Vite"],
@@ -41,6 +42,7 @@ export const projects = [
     },
     {
         title: "Personal Portfolio — Showcasing My Skills & Projects",
+        url: "https://sumanthreddykasireddy.vercel.app",
         description:
             "A modern developer portfolio built with React, Three.js, and Tailwind CSS. Showcasing interactive 3D elements, smooth animations, responsive design, and a clean user experience to highlight my projects, skills, and passion for web development.",
         tags: ["React", "Three.js", "Tailwind CSS", "JavaScript"],
