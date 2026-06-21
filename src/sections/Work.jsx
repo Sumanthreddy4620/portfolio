@@ -14,7 +14,6 @@ const Work = () => {
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Title animates in first
         gsap.from('.work-title', {
             opacity: 0,
             y: 30,
@@ -27,7 +26,6 @@ const Work = () => {
             },
         });
 
-        // Carousel animates in after title
         gsap.from('.work-carousel', {
             opacity: 0,
             y: 50,
@@ -40,7 +38,6 @@ const Work = () => {
             },
         });
 
-        // Nav dots + arrows animate in last
         gsap.from('.work-nav', {
             opacity: 0,
             y: 20,
@@ -57,7 +54,7 @@ const Work = () => {
     return (
         <section className="w-full py-20 c-space" id="work">
             <h1 className="work-title sm:text-3xl text-2xl font-semibold text-white text-center font-generalsans mb-12">
-                Projects ShowCase
+                Featured Projects
             </h1>
 
             <div className="work-carousel relative max-w-5xl mx-auto px-2 py-6">

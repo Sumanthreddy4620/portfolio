@@ -80,7 +80,6 @@ const Hero = () => {
                     className="flex items-center justify-center gap-2 sm:text-3xl text-2xl font-medium text-white font-generalsans"
                     style={{ zIndex: 20, perspective: '500px' }}
                 >
-                    {/* perspective on parent is required for rotateX to look 3D */}
                     <p className="hi-text" style={{ overflow: 'hidden' }}>
                         Hi, I am
                     </p>
@@ -94,7 +93,6 @@ const Hero = () => {
                 </p>
             </div>
 
-            {/* Canvas stays full-bleed behind everything */}
             <div className="w-full h-full absolute inset-0">
                 <Canvas>
                     <Suspense fallback={<CanvasLoader />}>

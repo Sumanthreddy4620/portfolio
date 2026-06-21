@@ -104,7 +104,6 @@ const About = () => {
                     }}
                 />
 
-                {/* Card 1 */}
                 <div className="about-card col-span-1 xl:row-span-3 relative z-10">
                     <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
                         <img src="assets/grid1.png" alt="grid-1" className="w-full sm:h-[276px] h-fit object-contain" />
@@ -117,7 +116,6 @@ const About = () => {
                     </GridCard>
                 </div>
 
-                {/* Card 2 */}
                 <div className="about-card col-span-1 xl:row-span-3 relative z-10">
                     <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
                         <img src="assets/grid2.png" alt="grid-2" className="w-full sm:h-[276px] h-fit object-contain" />
@@ -130,7 +128,6 @@ const About = () => {
                     </GridCard>
                 </div>
 
-                {/* Card 3 - Globe */}
                 <div className="about-card col-span-1 xl:row-span-4 relative z-10">
                     <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
                         <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center">
@@ -154,7 +151,6 @@ const About = () => {
                     </GridCard>
                 </div>
 
-                {/* Card 4 */}
                 <div className="about-card xl:col-span-2 xl:row-span-3 relative z-10">
                     <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
                         <img src="assets/grid3.png" alt="grid-3" className="w-full sm:h-[266px] h-fit object-contain" />
@@ -167,7 +163,6 @@ const About = () => {
                     </GridCard>
                 </div>
 
-                {/* Card 5 - Email */}
                 <div className="about-card xl:col-span-1 xl:row-span-2 relative z-10">
                     <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
                         <img

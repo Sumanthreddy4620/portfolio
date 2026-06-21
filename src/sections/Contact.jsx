@@ -44,7 +44,6 @@ const Contact = () => {
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Title
         gsap.from('.contact-title', {
             opacity: 0,
             y: 30,
@@ -57,7 +56,6 @@ const Contact = () => {
             },
         });
 
-        // Subtitle paragraph
         gsap.from('.contact-sub', {
             opacity: 0,
             y: 20,
@@ -70,7 +68,6 @@ const Contact = () => {
             },
         });
 
-        // Each form field one by one
         document.querySelectorAll('.contact-field').forEach((field) => {
             gsap.from(field, {
                 opacity: 0,
@@ -85,7 +82,6 @@ const Contact = () => {
             });
         });
 
-        // Submit button
         gsap.from('.contact-btn', {
             opacity: 0,
             y: 20,
