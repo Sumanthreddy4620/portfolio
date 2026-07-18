@@ -58,9 +58,6 @@ const About = () => {
     useGSAP(() => {
         gsap.registerPlugin(SplitText, ScrollTrigger);
 
-        // Each card gets its own ScrollTrigger so it fires
-        // exactly when that card enters the viewport —
-        // works perfectly on mobile where cards stack vertically
         document.querySelectorAll('.about-card').forEach((card) => {
             gsap.from(card, {
                 opacity: 0,
@@ -140,7 +137,7 @@ const About = () => {
                                 showGraticules
                                 globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
                                 bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-                                // labelsData={[{ lat: 17.3, lng: 79.1, text: 'Miryalaguda, India', color: 'white', size: 15 }]}
+                            // labelsData={[{ lat: 17.3, lng: 79.1, text: 'Miryalaguda, India', color: 'white', size: 15 }]}
                             />
                         </div>
                         <div>

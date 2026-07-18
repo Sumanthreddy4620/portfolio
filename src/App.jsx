@@ -9,6 +9,7 @@ import Work from "./sections/Work.jsx";
 import About from "./sections/About.jsx";
 import Contact from "./sections/Contact.jsx";
 import Footer from "./sections/Footer.jsx";
+import ChatBot from "./components/ChatBot.jsx";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -38,9 +39,8 @@ const App = () => {
             </div>
             <Analytics />
             <SpeedInsights />
+            <ChatBot />
         </main>
     )
 }
 export default App
-
-
