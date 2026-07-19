@@ -18,26 +18,50 @@ const Contact = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        try {
-            await emailjs
-                .send(
-                    'service_6kbmtuf',
-                    'template_uy33wqf',
-                    {
-                        from_name: form.name,
-                        to_name: 'Sumanth Reddy Kasireddy',
-                        from_email: form.email,
-                        to_email: 'k.sumanthreddy4620@gmail.com',
-                        message: form.message,
-                    },
-                    'YmCAndAbpTcEnvIyv')
 
-            setLoading(false);
+        // ── Save to Supabase DB (backup) + send via EmailJS — in parallel ──
+        const [emailResult, dbResult] = await Promise.allSettled([
+            // 1. EmailJS — sends email to Gmail
+            emailjs.send(
+                'service_6kbmtuf',
+                'template_uy33wqf',
+                {
+                    from_name: form.name,
+                    to_name: 'Sumanth Reddy Kasireddy',
+                    from_email: form.email,
+                    to_email: 'k.sumanthreddy4620@gmail.com',
+                    message: form.message,
+                },
+                'YmCAndAbpTcEnvIyv'
+            ),
+            // 2. Supabase — saves backup copy to database
+            fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: form.name,
+                    email: form.email,
+                    message: form.message,
+                }),
+            }).then(r => r.ok ? r.json() : Promise.reject(new Error(`DB error: ${r.status}`))),
+        ]);
+
+        setLoading(false);
+
+        // Log results for debugging
+        if (emailResult.status === 'rejected') {
+            console.warn('EmailJS failed:', emailResult.reason);
+        }
+        if (dbResult.status === 'rejected') {
+            console.warn('Supabase backup failed:', dbResult.reason);
+        }
+
+        // Show success if at least ONE channel worked
+        if (emailResult.status === 'fulfilled' || dbResult.status === 'fulfilled') {
             alert('Your message has been sent!');
-        } catch(error) {
-            setLoading(false);
-            console.log(error);
-            alert('Something went wrong!');
+            setForm({ name: '', email: '', message: '' }); // reset form
+        } else {
+            alert('Something went wrong. Please try again or email directly.');
         }
     };
 
