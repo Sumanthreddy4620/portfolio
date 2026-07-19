@@ -17,12 +17,15 @@ const envContent = readFileSync(envPath, 'utf-8');
 const env = Object.fromEntries(
   envContent.split('\n')
     .filter(line => line.trim() && !line.startsWith('#'))
-    .map(line => line.split('=').map((v, i) => i === 0 ? v.trim() : v.trim()))
+    .map(line => {
+      const idx = line.indexOf('=');
+      return [line.slice(0, idx).trim(), line.slice(idx + 1).trim()];
+    })
 );
 
-const SUPABASE_URL = env.SUPABASE_URL;
+const SUPABASE_URL         = env.SUPABASE_URL;
 const SUPABASE_SERVICE_KEY = env.SUPABASE_SERVICE_KEY;
-const JINA_API_KEY = env.JINA_API_KEY;
+const JINA_API_KEY         = env.JINA_API_KEY;
 
 if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY || !JINA_API_KEY) {
   console.error('❌ Missing env vars. Check your .env file.');
@@ -32,170 +35,220 @@ if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY || !JINA_API_KEY) {
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
 // ── Resume data chunks ─────────────────────────────────────────────────────
-// Each chunk is a focused piece of information the chatbot can retrieve.
+// Source: Sumanth Reddy Kasireddy's actual resume (July 2026)
 // Update these chunks whenever your resume changes, then re-run this script.
 const RESUME_CHUNKS = [
   {
     section: 'profile',
     content: `Name: Sumanth Reddy Kasireddy
-Title: Frontend Developer & Competitive Programmer
-Location: India
+Title: Computer Science Undergraduate | Frontend Developer & Competitive Programmer
+Phone: +91 7013410428
 Email: k.sumanthreddy4620@gmail.com
+Location: Miryalguda, India 508207
 LinkedIn: https://www.linkedin.com/in/sumanthreddy-kasireddy-72b6662a9/
 GitHub: https://github.com/Sumanthreddy4620
 Portfolio: https://sumanthreddykasireddy.vercel.app`,
   },
   {
+    section: 'resume-download',
+    content: `Sumanth's Resume / CV Download:
+If a visitor asks for Sumanth's resume, CV, or wants to download his resume, provide this direct link:
+https://sumanthreddykasireddy.vercel.app/resume.pdf
+
+The resume is a PDF document that can be viewed or downloaded directly from the portfolio website.`,
+  },
+  {
     section: 'summary',
-    content: `Sumanth Reddy Kasireddy is a Computer Science and Engineering undergraduate student (B.Tech, 2023–2027) 
-specializing in modern Frontend Web Development and Competitive Programming. 
-He focuses on developing highly performant, visually rich, and interactive user interfaces 
-using React, Three.js, and GSAP. He also possesses strong logical reasoning 
-skills built through methodically practicing algorithmic problems in C++.`,
+    content: `Professional Summary:
+Detail-oriented Computer Science undergraduate (4th year, expected graduation September 2027) with hands-on experience building full-stack, animation-driven web applications using React, Three.js, and GSAP. Solid foundation in data structures and algorithms strengthened through consistent competitive programming in C++. Committed to writing clean, high-performance code and eager to contribute to a dynamic software development team.`,
   },
   {
     section: 'skills',
-    content: `Skills Sumanth is comfortable with:
-- React, Three.js, React Three Fiber, GSAP (GreenSock), Tailwind CSS
-- JavaScript (ES6+), HTML5, CSS3
-- C++ (Data Structures & Algorithms)
-- Git, GitHub, Vercel
+    content: `Technical Skills:
 
-Skills currently learning:
-- Node.js
-- SQL Databases (MySQL / PostgreSQL — foundational knowledge)
+Languages: C++, C, JavaScript, HTML/CSS
 
-Academic/foundational knowledge:
+Web & Frameworks:
+- React.js
+- Three.js (React Three Fiber / R3F)
+- GSAP (GreenSock Animation Platform)
+- Tailwind CSS
+- EmailJS
+
+Tools & Platforms:
+- Git, GitHub
+- Vercel
+- VS Code
+- Google Search Console
+
+CS Fundamentals:
 - Data Structures & Algorithms
-- Operating Systems (coursework)
-- Compiler Design fundamentals (regular expressions, NFA/DFA, lexical analysis)
-
-Tools: VS Code, Git, GitHub, Vercel, Figma`,
+- Object-Oriented Programming (OOP)
+- Competitive Programming`,
   },
   {
     section: 'education',
     content: `Education:
-- Degree: B.Tech in Computer Science and Engineering
-- Institution: SR International Institute of Technology
-- Duration: 2023 – 2027 (currently in progress)
-- CGPA: Not disclosed publicly. Sumanth prefers to let his projects and code quality speak for his capabilities.`,
+
+1. Bachelor of Science, Computer Science
+   Institution: SR International Institute of Technology
+   Location: Rampally, Dayara, Keesara, Hyderabad
+   Expected Graduation: September 2027
+   Status: Currently in 4th year (final year)
+
+2. Intermediate Certificate (MPC — Mathematics, Physics, Chemistry)
+   Institution: Narayana Junior College
+   Location: Madhapur, Hyderabad
+   Completed: April 2023`,
   },
   {
     section: 'experience',
     content: `Work Experience:
 Sumanth does not have formal internship experience yet. His technical capabilities are demonstrated 
-through his projects (3D Portfolio Website, Velvet Pour) and his competitive programming practice. 
-He is open to immediate internship opportunities.`,
+through his projects (Personal Portfolio Website, Cocktail-Themed Landing Page, Competitive Programming) 
+and consistent competitive programming on LeetCode. He is open to immediate internship and full-time opportunities.`,
   },
   {
     section: 'project-portfolio',
-    content: `Project: Personal 3D Portfolio Website
+    content: `Project 1: Personal Portfolio Website
+Technologies: React, Three.js (React Three Fiber / R3F), GSAP, Tailwind CSS
 URL: https://sumanthreddykasireddy.vercel.app
-Description: A high-performance personal portfolio showcasing interactive 3D elements, premium micro-animations, 
-and responsive design interfaces. Features a custom-textured interactive 3D mechanical keyboard scene in the 
-hero section, smooth scroll-driven typography animations, a project display carousel, and a fully integrated 
-contact portal. Engineered with a lazy-loading architecture to optimize bundle sizes and improve initial page 
-load performance.
-Technologies: React, Three.js, React Three Fiber, GSAP, Tailwind CSS, EmailJS, Vite, Vercel`,
+
+Key achievements:
+- Built a 3D interactive hero section featuring a mechanical keyboard model with real-time mouse-tracking rotation using React Three Fiber.
+- Implemented scroll-triggered animations (GSAP SplitText, BorderGlow carousel) across Hero, About, Work, and Contact sections for a polished, motion-driven UX.
+- Integrated a working contact form via EmailJS and deployed on Vercel; configured Google Search Console and sitemap for discoverability.
+- Added an AI-powered chatbot to assist visitors and answer questions about the portfolio and projects in real time.
+- Engineered lazy-loading architecture to optimize bundle sizes and improve initial page load performance.`,
   },
   {
     section: 'project-velvetpour',
-    content: `Project: Velvet Pour
+    content: `Project 2: Cocktail-Themed Landing Page (also known as Velvet Pour)
+Technologies: React, GSAP
 URL: https://mojito-velvetpour.vercel.app
-Description: A premium beverage landing page showcasing cinematic animations, smooth scroll-linked movements, 
-elegant custom typography layouts, and immersive visual storytelling. Designed to mirror modern high-end 
-brand aesthetics. Demonstrates Sumanth's ability to create emotionally engaging, visually stunning web experiences.
-Technologies: React, GSAP, Tailwind CSS, Vite`,
+
+Key achievements:
+- Designed and built an animated marketing landing page with scroll-based storytelling and GSAP timeline animations.
+- Focused on smooth transitions and visual pacing to create an immersive, brand-driven browsing experience.
+- Demonstrates ability to create emotionally engaging, visually stunning web experiences.`,
+  },
+  {
+    section: 'project-competitive-programming',
+    content: `Project 3: Competitive Programming Practice
+Technologies: C++, LeetCode
+
+Key achievements:
+- Solved 100+ problems spanning arrays, dynamic programming, binary search, and string matching.
+- Example problems: Rotated Sorted Arrays, Climbing Stairs, House Robber, Regular Expression Matching.
+- Core topics: Arrays, Dynamic Programming (DP), Backtracking, Binary Search, String Matching.
+- Practices consistently on LeetCode with focus on accuracy and clean solutions.`,
   },
   {
     section: 'portfolio-architecture',
     content: `Portfolio Website Architecture & Technical Details:
 
 1. HERO SECTION:
-   - Interactive 3D mechanical keyboard model loaded from GLB file using React Three Fiber and Three.js
-   - Custom lighting: ambient, directional, point, and spotlight for premium appearance
-   - Keys have white custom emissive glow (intensity 0.8)
-   - Title text animations powered by GSAP SplitText (letter-by-letter fade-in)
-   - 3D canvas scales dynamically for mobile, tablet, and desktop viewports
+   - Interactive 3D mechanical keyboard model with real-time mouse-tracking rotation (React Three Fiber)
+   - Custom lighting: ambient, directional, point, spotlight
+   - GSAP SplitText letter-by-letter title animation
+   - Responsive 3D canvas scaling for mobile, tablet, desktop
 
 2. ABOUT SECTION:
    - Multi-column CSS Grid with glassmorphism cards
-   - Mouse-tracking radial glow overlay (cursor follows spotlight gradient)
-   - Live rotating 3D Earth Globe built with react-globe.gl
-   - GSAP ScrollTrigger animations for card entrance
+   - Mouse-tracking radial glow overlay
+   - Live rotating 3D Earth Globe (react-globe.gl)
+   - GSAP ScrollTrigger card entrance animations
 
 3. WORK (PROJECTS) SECTION:
    - Interactive projects carousel
-   - Scroll-triggered BorderGlow card structure with animated gradients
+   - Scroll-triggered BorderGlow animated gradient cards
 
 4. CONTACT SECTION:
-   - Functional contact form using EmailJS (no backend required)
+   - EmailJS contact form + Supabase database backup
 
-5. PERFORMANCE OPTIMIZATION:
-   - Lazy-loading of heavy 3D components and assets
-   - Built with Vite for optimized production bundling`,
+5. PERFORMANCE:
+   - Lazy-loading of 3D components
+   - Vite optimized bundling
+   - Vercel deployment + Google Search Console + sitemap`,
   },
   {
     section: 'interests',
-    content: `Sumanth's interests and hobbies:
-- Algorithmic Problem Solving & Competitive Programming
-- 3D Graphics & Creative Web Design
+    content: `Sumanth's interests and activities:
+- Algorithmic Problem Solving & Competitive Programming (LeetCode, C++)
+- 3D Graphics & Creative Web Design (Three.js, GSAP animations)
+- Full-stack development (expanding into Node.js, Express.js, SQL)
 - Physical fitness (daily skipping workouts)
 - Strategy gaming (Clash of Clans)
-- PC Hardware & Workspace Aesthetics
-
-Beyond coding, Sumanth maintains a balanced lifestyle combining technical pursuits with fitness and strategic gaming.`,
+- PC Hardware & Workspace Aesthetics`,
   },
   {
     section: 'availability',
-    content: `Availability & Career:
-- Sumanth is open to engineering internship opportunities immediately.
-- Open to full-time roles beginning after graduation in 2027.
-- Currently exploring full-stack engineering pathways.
-- Open to frontend, backend, or full-stack positions.`,
+    content: `Availability & Career Goals:
+- Actively looking for internship opportunities immediately.
+- Open to full-time software engineering roles after graduation in September 2027.
+- Interested in frontend, backend, or full-stack positions.
+- Currently expanding into backend: Node.js, Express.js, SQL databases (MySQL/PostgreSQL).
+- Eager to contribute to a dynamic software development team.`,
   },
   {
     section: 'background',
-    content: `How Sumanth got into programming:
-He discovered his interest in software engineering through college coursework at SR International Institute of Technology. 
-It developed as an academic interest that quickly grew into a passion. He enjoys two distinct areas:
-- Frontend Development: Designing intuitive, creative, and highly interactive user interfaces.
-- Competitive Programming: Methodically solving complex algorithmic challenges and logical puzzles.`,
+    content: `Background & Story:
+Sumanth discovered software engineering through college coursework at SR International Institute of Technology, Hyderabad.
+It grew from academic interest into genuine passion. He excels in two areas:
+
+Frontend Development: Building interactive UIs with React, Three.js, and GSAP.
+Competitive Programming: Solving algorithmic problems in C++ on LeetCode.
+
+He is from Miryalguda, India, completed MPC Intermediate at Narayana Junior College, and is currently a 4th-year CS student.`,
   },
   {
     section: 'competitive-programming',
     content: `Competitive Programming approach:
-Sumanth focuses on steady, consistent skill building rather than chasing leaderboard metrics on platforms like LeetCode or Codeforces. 
-His practice centers on mastering core concepts including Arrays, Dynamic Programming (DP), Backtracking, Union-Find, Tries, and Graphs. 
-He aims for perfect accuracy and clean execution, focusing on eliminating minor errors to ensure fundamentals remain solid.`,
+Sumanth practices on LeetCode using C++ and has solved 100+ problems.
+Core topics mastered:
+- Arrays and String Manipulation (e.g., Regular Expression Matching)
+- Dynamic Programming (Climbing Stairs, House Robber)
+- Binary Search (Rotated Sorted Arrays)
+- Backtracking, Graphs, Union-Find, Tries
+
+Approach: aims for perfect accuracy and clean execution, eliminating minor bugs, building solid fundamentals.`,
   },
   {
     section: 'work-style',
-    content: `Sumanth's problem-solving and work approach:
-When debugging or resolving a complex issue, he proceeds systematically. He avoids quick fixes or copy-pasting solutions; 
-instead, he grinds through the problem until he completely understands the root cause of the error. 
-This thoroughness ensures that the code is robust and performant. 
-His main professional strength is relentless persistence and structured problem-solving.`,
+    content: `Sumanth's problem-solving and work style:
+- Proceeds systematically when debugging — no quick fixes or copy-pasting.
+- Grinds through problems until the root cause is fully understood.
+- Ensures code is robust, clean, and performant.
+
+Professional strengths:
+- Relentless persistence and structured problem-solving
+- Strong attention to detail in UI/animation polish
+- Able to work on both creative (3D/animation) and logical (DS/algorithms) challenges`,
   },
   {
     section: 'faq',
     content: `Frequently Asked Questions about Sumanth:
 
-Q: What sets your portfolio apart from other developers?
-A: It is designed and built from scratch rather than using templates. The custom 3D hero model, performance tuning (lazy-loading), 
-and hand-crafted GSAP animations demonstrate ability to solve real software challenges and optimize user experience.
+Q: Can I download or view Sumanth's resume?
+A: Yes! Download it here: https://sumanthreddykasireddy.vercel.app/resume.pdf
 
-Q: Do you have any internship experience?
-A: No formal internship experience yet. Technical capabilities are demonstrated through projects and competitive programming.
+Q: What sets your portfolio apart?
+A: Built entirely from scratch — no templates. Features a custom 3D mechanical keyboard hero, GSAP SplitText animations, BorderGlow carousel, an AI chatbot, and Google Search Console/sitemap integration.
 
-Q: Do you hold any technical certifications?
-A: Several certifications are in progress, but none are officially finalized at this time.
+Q: Do you have internship experience?
+A: Not yet. Technical capabilities shown through projects and 100+ LeetCode solutions in C++.
 
-Q: What is your current CGPA?
-A: Not shared publicly. Projects, code quality, and problem-solving skills speak for capabilities.
+Q: What is your educational background?
+A: BS Computer Science at SR International Institute of Technology, Hyderabad (Expected September 2027). MPC Intermediate at Narayana Junior College, Hyderabad (April 2023).
 
-Q: What technologies are you currently exploring?
-A: Expanding into backend development using Node.js and Express.js, along with SQL databases (MySQL and PostgreSQL).`,
+Q: What technologies are you learning?
+A: Node.js, Express.js, MySQL/PostgreSQL for full-stack development.
+
+Q: What is your CGPA?
+A: Not shared publicly. Projects and problem-solving speak for capabilities.
+
+Q: How can I contact Sumanth?
+A: LinkedIn: https://www.linkedin.com/in/sumanthreddy-kasireddy-72b6662a9/ | GitHub: https://github.com/Sumanthreddy4620 | Email: k.sumanthreddy4620@gmail.com | Phone: +91 7013410428`,
   },
 ];
 
@@ -232,12 +285,12 @@ async function seed() {
   console.log('🗑️  Clearing existing resume_chunks...');
   const { error: deleteError } = await supabase.from('resume_chunks').delete().neq('id', 0);
   if (deleteError) {
-    console.warn('⚠️  Could not clear table (may not exist yet):', deleteError.message);
+    console.warn('⚠️  Could not clear table:', deleteError.message);
   } else {
     console.log('✅ Table cleared.\n');
   }
 
-  // Step 2: Embed all chunks in batches of 5 (Jina rate limits)
+  // Step 2: Embed all chunks in batches of 5
   const BATCH_SIZE = 5;
   const allRows = [];
 
@@ -250,19 +303,18 @@ async function seed() {
     const embeddings = await embedTexts(texts);
     batch.forEach((chunk, idx) => {
       allRows.push({
-        section: chunk.section,
-        content: chunk.content,
+        section:   chunk.section,
+        content:   chunk.content,
         embedding: embeddings[idx],
       });
     });
 
-    // Small delay between batches to respect rate limits
     if (i + BATCH_SIZE < RESUME_CHUNKS.length) {
       await new Promise(r => setTimeout(r, 500));
     }
   }
 
-  // Step 3: Insert all rows into Supabase
+  // Step 3: Insert all rows
   console.log(`\n💾 Inserting ${allRows.length} chunks into Supabase...`);
   const { error: insertError } = await supabase.from('resume_chunks').insert(allRows);
   if (insertError) {
