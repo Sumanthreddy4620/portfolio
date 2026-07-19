@@ -1,123 +1,21 @@
 import { useState, useRef, useEffect } from 'react';
-import { resumeData, knowledgeBase } from '../constants/resumeData.js';
 
-
-// ─── Build the system prompt from resumeData + knowledgeBase ────────────────
-const buildSystemPrompt = () => {
-  const r = resumeData;
-
-  const comfortableSkills = (r.skills.comfortable || []).join(', ');
-  const learningSkills    = (r.skills.learning    || []).join(', ');
-  const academicSkills    = (r.skills.academic    || []).join(', ');
-
-  const educationText = r.education.length
-    ? r.education.map(e =>
-        `  - ${e.degree} at ${e.institution} (${e.year})${e.gpa ? `, GPA: ${e.gpa}` : ''}`
-      ).join('\n')
-    : '  B.Tech Computer Science Engineering, 2023-2027 (in progress).';
-
-  const experienceText = r.experience.length
-    ? r.experience.map(e =>
-        `  - ${e.role} @ ${e.company} (${e.duration}): ${e.description}`
-      ).join('\n')
-    : '  No internships yet. Primary proof points are projects and competitive programming.';
-
-  const projectsText = r.projects
-    .map(p =>
-      `  - ${p.name}: ${p.description} [Tech: ${p.tech.join(', ')}]${p.url ? ` | ${p.url}` : ''}`
-    )
-    .join('\n');
-
-  return `You are a highly professional and articulate AI assistant embedded in ${r.name}'s developer portfolio website.
-Your primary objective is to assist visitors, recruiters, and prospective collaborators in learning about ${r.name}'s skills, projects, background, technical expertise, and availability.
-Maintain a polite, formal, polished, and helpful tone. Do not use overly casual language, slang, or emojis in your responses.
-Speak in the third person when referring to Sumanth (e.g., "Sumanth developed this," "His primary focus is...").
-When visitors ask for contact info, professional profiles, or links to reach Sumanth, provide his LinkedIn link (${r.linkedin}) and GitHub link (${r.github}). Do not mention or link the portfolio website itself.
-Be direct, clear, honest, and specific. Under no circumstances should you fabricate certifications, internships, or academic scores.
-Only answer inquiries related to Sumanth's professional background and projects.
-If a visitor asks an off-topic question, politely decline and steer the conversation back to Sumanth's portfolio and qualifications.
-
-CORE PROFILE
-============
-NAME:      ${r.name}
-TITLE:     ${r.title}
-LOCATION:  ${r.location}
-GITHUB:    ${r.github}
-LINKEDIN:  ${r.linkedin}
-EMAIL:     ${r.email}
-
-SUMMARY:
-${r.summary.trim()}
-
-SKILLS - COMFORTABLE WITH:
-  ${comfortableSkills}
-
-SKILLS - CURRENTLY LEARNING:
-  ${learningSkills}
-
-SKILLS - ACADEMIC FOUNDATION:
-  ${academicSkills}
-
-EDUCATION:
-${educationText}
-
-WORK EXPERIENCE:
-${experienceText}
-
-PROJECTS:
-${projectsText}
-
-INTERESTS: ${r.interests.join(', ')}
-
-AVAILABILITY: ${r.availability}
-
-EXTENDED KNOWLEDGE BASE
-=======================
-${knowledgeBase}
-`;
-};
-
-
-// ─── Groq API call (free tier, Llama 3) ─────────────────────────────────
-const callGroqAPI = async (messages) => {
-  const apiKey = import.meta.env.VITE_GROQ_API_KEY;
-
-  if (!apiKey) {
-    return "⚠️ No API key found. Please add VITE_GROQ_API_KEY to your .env file.";
-  }
-
-  const systemPrompt = buildSystemPrompt();
-
-  // Build messages array: system + conversation history
-  const groqMessages = [
-    { role: 'system', content: systemPrompt },
-    ...messages.map(msg => ({
-      role: msg.role === 'assistant' ? 'assistant' : 'user',
-      content: msg.content,
-    })),
-  ];
-
-  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+// ─── RAG Chat API call → /api/chat (serverless) ──────────────────────────
+// The server handles: Jina embedding → Supabase vector search → Groq LLM
+const callChatAPI = async (messages) => {
+  const res = await fetch('/api/chat', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: 'llama-3.3-70b-versatile',
-      messages: groqMessages,
-      max_tokens: 512,
-      temperature: 0.7,
-    }),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages }),
   });
 
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(err?.error?.message || `HTTP ${res.status}`);
+    throw new Error(err?.error || `Server error: HTTP ${res.status}`);
   }
 
   const data = await res.json();
-  return data.choices?.[0]?.message?.content ?? "I couldn't generate a response. Please try again.";
+  return data.reply ?? "I couldn't generate a response. Please try again.";
 };
 
 
@@ -241,7 +139,7 @@ const ChatBot = () => {
     try {
       // Only pass user/assistant messages to API (skip system)
       const apiMessages = updatedMessages.filter(m => m.role !== 'system');
-      const reply = await callGroqAPI(apiMessages);
+      const reply = await callChatAPI(apiMessages);
       setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
     } catch (err) {
       console.error('ChatBot error:', err);
@@ -276,7 +174,7 @@ const ChatBot = () => {
               </svg>
             </div>
             <div>
-              <p className="chatbot-header-name">{resumeData.name.split(' ')[0]}'s Assistant</p>
+              <p className="chatbot-header-name">Sumanth's Assistant</p>
               <p className="chatbot-header-status">
                 <span className="chatbot-status-dot" /> Online
               </p>
