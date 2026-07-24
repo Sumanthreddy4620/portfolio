@@ -2,7 +2,12 @@ import { useState, useRef, useEffect } from 'react';
 
 // ─── RAG Chat API call → /api/chat (serverless) ──────────────────────────
 // The server handles: Jina embedding → Supabase vector search → Groq LLM
+// ─── RAG Chat API call → /api/chat (serverless) ──────────────────────────
+// The server handles: Jina embedding → Supabase vector search → Groq LLM
 const callChatAPI = async (messages) => {
+  const lastMsg = messages[messages.length - 1]?.content;
+  console.log('%c🤖 [AI ChatBot] Sending query to backend:', 'color: #3b82f6; font-weight: bold; font-size: 12px;', lastMsg);
+
   const res = await fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -15,6 +20,20 @@ const callChatAPI = async (messages) => {
   }
 
   const data = await res.json();
+
+  if (data.debugInfo) {
+    console.group('%c🔍 [AI RAG Execution Pipeline Debug Info]', 'color: #10b981; font-weight: bold; font-size: 13px;');
+    console.log('1. 📥 User Message:', data.debugInfo.userQuery);
+    console.log(`2. 🔤 Vector Embedding (Jina AI jina-embeddings-v3): ${data.debugInfo.embeddingDimensions} float dimensions`);
+    console.log('   📐 Embedding Sample Vector:', data.debugInfo.embeddingSnippet);
+    console.log(`3. 🗄️ Supabase Vector Database Search (pgvector match_resume_chunks): Found ${data.debugInfo.retrievedChunksCount} matching chunks`);
+    if (data.debugInfo.retrievedChunks?.length) {
+      console.table(data.debugInfo.retrievedChunks);
+    }
+    console.log('4. 🤖 Groq LLM Generated Answer:', data.reply);
+    console.groupEnd();
+  }
+
   return data.reply ?? "I couldn't generate a response. Please try again.";
 };
 

@@ -1,5 +1,9 @@
 import { useRef, useCallback, useState, useEffect } from 'react';
 
+// True on touch-only devices (phones/tablets) — no hover capability
+const isTouchDevice = () =>
+    typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches;
+
 function parseHSL(hslStr) {
     const match = hslStr.match(/([\d.]+)\s*([\d.]+)%?\s*([\d.]+)%?/);
     if (!match) return { h: 40, s: 80, l: 80 };
@@ -65,8 +69,9 @@ const BorderGlow = ({
                         fillOpacity = 0.5,
                     }) => {
     const cardRef = useRef(null);
-    const hasAnimated = useRef(false); // ← prevents re-runs
+    const hasAnimated = useRef(false); // prevents re-runs
     const [isHovered, setIsHovered] = useState(false);
+    const [isTouching, setIsTouching] = useState(false);
     const [cursorAngle, setCursorAngle] = useState(45);
     const [edgeProximity, setEdgeProximity] = useState(0);
     const [sweepActive, setSweepActive] = useState(false);
@@ -108,9 +113,41 @@ const BorderGlow = ({
         setCursorAngle(getCursorAngle(card, x, y));
     }, [getEdgeProximity, getCursorAngle]);
 
+    // Touch handlers — same math as mouse, active on touch devices
+    const handleTouchStart = useCallback((e) => {
+        if (!isTouchDevice()) return;
+        const card = cardRef.current;
+        if (!card || e.touches.length === 0) return;
+        const touch = e.touches[0];
+        const rect = card.getBoundingClientRect();
+        const x = touch.clientX - rect.left;
+        const y = touch.clientY - rect.top;
+        setIsTouching(true);
+        setEdgeProximity(getEdgeProximity(card, x, y));
+        setCursorAngle(getCursorAngle(card, x, y));
+    }, [getEdgeProximity, getCursorAngle]);
+
+    const handleTouchMove = useCallback((e) => {
+        if (!isTouchDevice()) return;
+        const card = cardRef.current;
+        if (!card || e.touches.length === 0) return;
+        const touch = e.touches[0];
+        const rect = card.getBoundingClientRect();
+        const x = touch.clientX - rect.left;
+        const y = touch.clientY - rect.top;
+        setEdgeProximity(getEdgeProximity(card, x, y));
+        setCursorAngle(getCursorAngle(card, x, y));
+    }, [getEdgeProximity, getCursorAngle]);
+
+    const handleTouchEnd = useCallback(() => {
+        if (!isTouchDevice()) return;
+        setIsTouching(false);
+        setEdgeProximity(0);
+    }, []);
+
     // Extracted into its own callback so IntersectionObserver can call it
     const runIntroAnimation = useCallback(() => {
-        if (hasAnimated.current) return; // ← only fires once ever
+        if (hasAnimated.current) return; // only fires once ever
         hasAnimated.current = true;
 
         const angleStart = 110;
@@ -156,7 +193,7 @@ const BorderGlow = ({
     }, [animated, runIntroAnimation]);
 
     const colorSensitivity = edgeSensitivity + 20;
-    const isVisible = isHovered || sweepActive;
+    const isVisible = isHovered || sweepActive || isTouching;
     const borderOpacity = isVisible
         ? Math.max(0, (edgeProximity * 100 - colorSensitivity) / (100 - colorSensitivity))
         : 0;
@@ -175,6 +212,10 @@ const BorderGlow = ({
             onPointerMove={handlePointerMove}
             onPointerEnter={() => setIsHovered(true)}
             onPointerLeave={() => setIsHovered(false)}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onTouchCancel={handleTouchEnd}
             className={`relative grid isolate border border-white/15 ${className}`}
             style={{
                 background: backgroundColor,
