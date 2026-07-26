@@ -117,6 +117,7 @@ He is open to immediate software engineering internship opportunities and full-t
   {
     section: 'project-plantio',
     content: `Featured Project 1: Plantio — Botanical Care & Plant Intelligence Platform
+URL: https://plantio-plants.vercel.app
 Technologies: React.js | Node.js | Supabase (PostgreSQL) | REST API | iNaturalist API | Vercel | Render | JWT Authentication
 
 Key Achievements & Engineering Highlights:

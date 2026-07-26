@@ -23,7 +23,7 @@ export const navLinks = [
 export const projects = [
     {
         title: "Plantio — Botanical Care & Plant Intelligence Platform",
-        url: "https://plantio.vercel.app",
+        url: "https://plantio-plants.vercel.app",
         description:
             "A responsive full-stack web application delivering real-time search, category filtering, and smart care guidance across 300,000+ live plant species and 740+ disease/pest diagnostics.",
         highlights: [
