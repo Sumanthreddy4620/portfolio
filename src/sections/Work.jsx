@@ -97,6 +97,16 @@ const Work = () => {
                                             <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
                                                 {p.description}
                                             </p>
+                                            {p.highlights && (
+                                                <ul className="space-y-1.5 my-1">
+                                                    {p.highlights.map((h, idx) => (
+                                                        <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-neutral-300">
+                                                            <span className="text-emerald-400 font-bold shrink-0 mt-0.5">✦</span>
+                                                            <span><strong className="text-white font-medium">{h.title}:</strong> {h.text}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
                                             {p.tags && (
                                                 <div className="flex flex-wrap gap-2 mt-1">
                                                     {p.tags.map((tag, k) => (
