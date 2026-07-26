@@ -76,39 +76,41 @@ const Work = () => {
                                     colors={p.colors}
                                     animated={true}
                                 >
-                                    <div className="p-8 flex flex-col lg:flex-row gap-8 items-center">
-                                        <div className="flex-1 flex flex-col gap-5">
-                                            <a
-                                                href={p.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="group inline-flex items-center gap-2"
-                                            >
-                                                <h2 className="text-white text-xl sm:text-2xl font-bold leading-snug transition-all duration-300 group-hover:text-cyan-400">
-                                                    {p.title}
-                                                </h2>
+                                    <div className="p-8 flex flex-col lg:flex-row gap-8 items-stretch justify-between min-h-[500px] lg:min-h-[440px]">
+                                        <div className="flex-1 flex flex-col justify-between gap-4">
+                                            <div className="flex flex-col gap-3">
+                                                <a
+                                                    href={p.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="group inline-flex items-center gap-2"
+                                                >
+                                                    <h2 className="text-white text-xl sm:text-2xl font-bold leading-snug transition-all duration-300 group-hover:text-cyan-400">
+                                                        {p.title}
+                                                    </h2>
 
-                                                <img
-                                                    src="/assets/arrow-up.png"
-                                                    alt="arrow-up"
-                                                    className="field-btn_arrow transition-transform duration-300 group-hover:translate-x-1"
-                                                />
-                                            </a>
-                                            <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
-                                                {p.description}
-                                            </p>
-                                            {p.highlights && (
-                                                <ul className="space-y-1.5 my-1">
-                                                    {p.highlights.map((h, idx) => (
-                                                        <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-neutral-300">
-                                                            <span className="text-emerald-400 font-bold shrink-0 mt-0.5">✦</span>
-                                                            <span><strong className="text-white font-medium">{h.title}:</strong> {h.text}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            )}
+                                                    <img
+                                                        src="/assets/arrow-up.png"
+                                                        alt="arrow-up"
+                                                        className="field-btn_arrow transition-transform duration-300 group-hover:translate-x-1"
+                                                    />
+                                                </a>
+                                                <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
+                                                    {p.description}
+                                                </p>
+                                                {p.highlights && (
+                                                    <ul className="space-y-1.5 my-1">
+                                                        {p.highlights.map((h, idx) => (
+                                                            <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-neutral-300">
+                                                                <span className="text-emerald-400 font-bold shrink-0 mt-0.5">✦</span>
+                                                                <span><strong className="text-white font-medium">{h.title}:</strong> {h.text}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                )}
+                                            </div>
                                             {p.tags && (
-                                                <div className="flex flex-wrap gap-2 mt-1">
+                                                <div className="flex flex-wrap gap-2 mt-auto pt-2">
                                                     {p.tags.map((tag, k) => (
                                                         <span
                                                             key={k}
@@ -122,7 +124,7 @@ const Work = () => {
                                             )}
                                         </div>
 
-                                        <div className="w-full lg:w-[45%] rounded-xl overflow-hidden border border-white/10 shrink-0">
+                                        <div className="w-full lg:w-[45%] h-56 sm:h-64 lg:h-72 rounded-xl overflow-hidden border border-white/10 shrink-0 self-center">
                                             <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
                                         </div>
                                     </div>
