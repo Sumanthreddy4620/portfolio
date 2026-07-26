@@ -27,8 +27,8 @@ export const resumeData = {
     databasesAndCloud: ["Supabase (PostgreSQL)", "Vercel", "Render"],
     toolsAndPractices: ["Git", "GitHub", "JWT Authentication", "Data Structures & Algorithms", "Object-Oriented Programming", "System Design"],
     comfortable: [
-      "React.js", "Node.js", "Express.js", "REST APIs", "Supabase (PostgreSQL)", 
-      "Three.js (React Three Fiber)", "GSAP", "Tailwind CSS", "JavaScript (ES6+)", 
+      "React.js", "Node.js", "Express.js", "REST APIs", "Supabase (PostgreSQL)",
+      "Three.js (React Three Fiber)", "GSAP", "Tailwind CSS", "JavaScript (ES6+)",
       "C++", "C", "SQL", "Git", "GitHub", "JWT Authentication", "Vercel", "Render",
       "Data Structures & Algorithms", "Object-Oriented Programming"
     ],
@@ -41,7 +41,7 @@ export const resumeData = {
       "System Design Principles",
       "Computer Science & Engineering Core Coursework"
     ],
-    tools: ["Git", "GitHub", "VS Code", "Vercel", "Render", "Postman"],
+    tools: ["Git", "GitHub", "VS Code", "Vercel", "Render"],
   },
 
   education: [
@@ -62,7 +62,7 @@ export const resumeData = {
   projects: [
     {
       name: "Plantio — Botanical Care & Plant Intelligence Platform",
-      url: "https://plantio-plants.vercel.app",
+      url: "https://plantio.vercel.app",
       description:
         "Engineered a responsive full-stack web application integrating iNaturalist and Wikipedia REST APIs to deliver " +
         "real-time search, category filtering, and pagination across 300,000+ plant species. Built a standalone Node.js backend " +

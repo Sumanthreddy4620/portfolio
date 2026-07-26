@@ -28,19 +28,23 @@ export const projects = [
             "A responsive full-stack web application delivering real-time search, category filtering, and smart care guidance across 300,000+ live plant species and 740+ disease/pest diagnostics.",
         highlights: [
             {
-                title: "Full-Stack & APIs",
-                text: "iNaturalist & Wikipedia REST APIs integrated for real-time search across 300,000+ species."
+                title: "Full-Stack Architecture & APIs",
+                text: "Integrated iNaturalist and Wikipedia REST APIs for real-time search & taxonomy metadata across 300,000+ species."
             },
             {
-                title: "Cloud DB & Auth",
-                text: "Node.js backend with JWT auth & Supabase (PostgreSQL) for user accounts & schedule sync."
+                title: "Cloud DB & Persistent Auth",
+                text: "Built a Node.js backend with JWT authentication & Supabase (PostgreSQL) for persistent user accounts & schedule sync."
             },
             {
-                title: "Care Engine & Dashboard",
-                text: "Automated care inference module generating watering schedules, toxicity alerts & dashboards."
+                title: "Algorithmic Care Engine",
+                text: "Automated inference module generating dynamic watering frequencies, toxicity warnings, and light guides."
+            },
+            {
+                title: "Interactive Care Dashboards",
+                text: "User plant management dashboards with photo uploads, watering reminder modal editors, and grid filling layouts."
             }
         ],
-        tags: ["React.js", "Node.js", "Supabase", "REST API", "JWT", "Tailwind CSS"],
+        tags: ["React.js", "Node.js", "Supabase", "REST API", "iNaturalist API", "JWT", "Tailwind CSS"],
         image: "/assets/plantio.png",
         glowColor: "140 80 50",
         colors: [
@@ -62,15 +66,15 @@ export const projects = [
         highlights: [
             {
                 title: "3D Graphics & Lighting",
-                text: "Built with React Three Fiber featuring dynamic ambient lighting & mouse-tracking model rotation."
+                text: "Built with React Three Fiber featuring dynamic ambient lighting and real-time mouse-tracking model rotation."
             },
             {
-                title: "Scroll Micro-Interactions",
-                text: "GSAP SplitText typography animations & BorderGlow carousel effects across all sections."
+                title: "Scroll-Driven Animations",
+                text: "GSAP SplitText and BorderGlow carousel micro-interactions across Hero, About, Work, and Contact sections."
             },
             {
-                title: "Serverless AI Assistant",
-                text: "Integrated RAG pipeline combining Jina AI embeddings, Supabase pgvector & Groq Llama-3.3 LLM."
+                title: "AI Chatbot Assistant",
+                text: "Serverless RAG pipeline combining Jina AI vector embeddings, Supabase pgvector, and Groq Llama-3.3 LLM."
             }
         ],
         tags: ["React.js", "Three.js", "GSAP", "Tailwind CSS", "EmailJS", "Vercel"],
@@ -95,18 +99,10 @@ export const projects = [
         highlights: [
             {
                 title: "Cinematic Motion",
-                text: "Custom GSAP timelines and smooth parallax transitions optimizing visual pacing & engagement."
-            },
-            {
-                title: "High-End Typography",
-                text: "Designed elegant custom typography layouts mirroring luxury beverage brand aesthetics."
-            },
-            {
-                title: "Scroll Storytelling",
-                text: "Interactive scroll-linked movements guiding visitors through a premium beverage experience."
+                text: "Custom GSAP timelines and smooth parallax transitions optimizing visual pacing and user engagement."
             }
         ],
-        tags: ["React.js", "GSAP", "Vanilla CSS", "Vite", "Tailwind CSS"],
+        tags: ["React.js", "GSAP", "Vanilla CSS", "Vite"],
         image: "/assets/velvet-pour.png",
         glowColor: "40 80 80",
         colors: [
@@ -125,6 +121,6 @@ export const projects = [
 export const calculateSizes = (isSmall, isMobile, isTablet) => {
     return {
         deskScale: isSmall ? 0.28 : isMobile ? 0.34 : 0.4,
-        deskPosition: isSmall ? [2.0,-4.3,3.3] : isMobile ? [3.0, -6.3, -0.2] : isTablet ? [5.0, -4.9, 2.9]: [5.0, -3.5, 2.9]
+        deskPosition: isSmall ? [2.0, -4.3, 3.3] : isMobile ? [3.0, -6.3, -0.2] : isTablet ? [5.0, -4.9, 2.9] : [5.0, -3.5, 2.9]
     };
 };

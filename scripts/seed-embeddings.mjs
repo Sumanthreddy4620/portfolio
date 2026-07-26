@@ -23,9 +23,9 @@ const env = Object.fromEntries(
     })
 );
 
-const SUPABASE_URL         = env.SUPABASE_URL;
+const SUPABASE_URL = env.SUPABASE_URL;
 const SUPABASE_SERVICE_KEY = env.SUPABASE_SERVICE_KEY;
-const JINA_API_KEY         = env.JINA_API_KEY;
+const JINA_API_KEY = env.JINA_API_KEY;
 
 if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY || !JINA_API_KEY) {
   console.error('❌ Missing env vars. Check your .env file.');
@@ -239,7 +239,7 @@ A: Yes! Download it here: [Sumanth's Resume](https://sumanthreddykasireddy.verce
 
 Q: What are Sumanth's main projects?
 A: 1. Plantio: [Plantio — Botanical Care Platform](https://plantio-plants.vercel.app) (React, Node.js, Supabase PostgreSQL, JWT, REST APIs for 300k+ plant species)
-2. 3D Portfolio: [Interactive 3D Personal Portfolio](https://sumanthreddykasireddy.vercel.app) (React Three Fiber, GSAP, AI Chatbot)
+2. Personal Portfolio: [Portfolio](https://sumanthreddykasireddy.vercel.app) (React Three Fiber, GSAP, AI Chatbot)
 3. Velvet Pour: [Cocktail-Themed Motion Landing Page](https://mojito-velvetpour.vercel.app) (GSAP, Vanilla CSS)
 4. Competitive Programming (100+ solved problems on LeetCode/CodeChef in C++)
 
@@ -305,8 +305,8 @@ async function seed() {
     const embeddings = await embedTexts(texts);
     batch.forEach((chunk, idx) => {
       allRows.push({
-        section:   chunk.section,
-        content:   chunk.content,
+        section: chunk.section,
+        content: chunk.content,
         embedding: embeddings[idx],
       });
     });
