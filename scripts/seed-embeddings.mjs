@@ -60,7 +60,7 @@ The resume is a PDF document that can be viewed or downloaded directly from the 
   {
     section: 'summary',
     content: `Professional Summary:
-Performance-driven Computer Science undergraduate with hands-on expertise engineering full-stack, responsive, and animation-rich web applications using React.js, Node.js, REST APIs, Supabase (PostgreSQL), Three.js, and GSAP. Strong foundation in Data Structures, Algorithms, and System Design principles, backed by consistent competitive programming in C++. Passionate about building highly scalable, secure, and visually captivating digital products that solve real-world problems.`,
+Full-stack developer specializing in AI-integrated, animation-rich web applications, with hands-on expertise using React.js, Node.js, REST APIs, Supabase (PostgreSQL), Three.js, and GSAP. Strong foundation in Data Structures, Algorithms, and System Design principles, backed by consistent competitive programming in C++. Passionate about building highly scalable, secure, and visually captivating digital products that solve real-world problems.`,
   },
   {
     section: 'skills',
@@ -76,15 +76,17 @@ Frameworks & Libraries:
 - Three.js (React Three Fiber)
 - GSAP (GreenSock Animation Platform)
 - Tailwind CSS
+- Canvas API
 
-Databases & Cloud:
+AI & Cloud Services:
+- Gemini Pro / Vision API
 - Supabase (PostgreSQL)
 - Vercel
 - Render
 
 Tools & Practices:
 - Git, GitHub
-- JWT Authentication
+- JWT / Token Authentication
 - Data Structures & Algorithms
 - Object-Oriented Programming (OOP)
 - System Design principles`,
@@ -105,39 +107,40 @@ Tools & Practices:
   {
     section: 'experience',
     content: `Work Experience & Capabilities:
-Sumanth demonstrates technical capabilities through full-stack projects, creative 3D web engineering, and competitive programming.
+Sumanth demonstrates technical capabilities through full-stack AI-integrated projects, creative 3D web engineering, and competitive programming.
 Featured Projects & Live Links:
-1. Plantio: [Plantio — Botanical Care & Plant Intelligence Platform](https://plantio-plants.vercel.app) (Full-Stack React, Node.js, Supabase PostgreSQL, JWT, iNaturalist & Wikipedia APIs)
-2. 3D Portfolio: [Interactive 3D Personal Portfolio](https://sumanthreddykasireddy.vercel.app) (React Three Fiber, GSAP, EmailJS, AI Chatbot)
-3. Velvet Pour: [Cocktail-Themed Motion Landing Page](https://mojito-velvetpour.vercel.app) (GSAP, Vanilla CSS)
-4. Competitive Programming (100+ problems solved on LeetCode & CodeChef in C++)
+1. Plantio: [Plantio — AI-Powered Botanical & Plant Care Platform](https://plantio-plants.vercel.app) (React.js, Node.js, Gemini AI Vision API, Supabase PostgreSQL, HTML5 Canvas API, REST APIs)
+2. 3D Portfolio: [Interactive 3D Personal Portfolio](https://sumanthreddykasireddy.vercel.app) (React Three Fiber, GSAP, Jina AI, Supabase pgvector, Groq LLM, EmailJS)
+3. Competitive Programming (100+ problems solved on LeetCode & CodeChef in C++)
 
 He is open to immediate software engineering internship opportunities and full-time positions post-graduation in September 2027.`,
   },
   {
     section: 'project-plantio',
-    content: `Featured Project 1: Plantio — Botanical Care & Plant Intelligence Platform
+    content: `Featured Project 1: Plantio — AI-Powered Botanical & Plant Care Platform
 Live Demo Link: [Plantio](https://plantio-plants.vercel.app)
 URL: https://plantio-plants.vercel.app
-Technologies: React.js | Node.js | Supabase (PostgreSQL) | REST API | iNaturalist API | Vercel | Render | JWT Authentication
+Technologies: React.js | Node.js | Gemini AI Vision API | Supabase (PostgreSQL) | REST APIs | HTML5 Canvas API | Vercel | Render | JWT / HMAC Token Auth
 
 Key Achievements & Engineering Highlights:
-- Full-Stack Architecture & API Integration: Engineered a responsive web application integrating iNaturalist and Wikipedia REST APIs to deliver real-time search, category filtering, and pagination across 300,000+ plant species.
-- Cloud Database & Persistent Auth: Built a standalone Node.js backend with JWT authentication and integrated Supabase (PostgreSQL) for persistent user accounts, watering schedule tracking, and cross-device session synchronization.
-- Algorithmic Care Engine: Developed an automated inference module parsing taxonomic metadata to dynamically generate customized watering frequencies, toxicity warnings, and light requirement guides for each species.
-- Interactive Care Tracker: Implemented responsive user plant dashboards with custom photo uploads, watering reminder modal editors, and mobile-optimized grid filling layouts.`,
+- AI Disease Diagnosis & Botanical Scanner: Engineered an AI Doctor gateway utilizing Gemini Vision API to analyze plant leaf images and text queries in real time, detecting 740+ plant diseases, pests, and nutrient deficiencies with organic remedy suggestions.
+- Interactive Site-Wide AI Chatbot: Built a floating, responsive AI assistant modal (AIChatModal) available across all pages for instant interactive plant troubleshooting, context-aware care advice, and botanical Q&A.
+- Photo Growth Journal & Canvas Compression: Developed a multi-stage visual growth timeline (Day 1 to Year 1) with client-side HTML5 Canvas image compression (JPEG 0.7, max 450px), optimizing photo uploads to under 30KB for instant cloud sync to Supabase PostgreSQL.
+- Smart Watering Tracker & Batch Operations: Implemented dynamic watering status badges (Watered, Due Today, Overdue) with 1-click single and batch "Water All" actions, syncing custom care frequencies across user devices.
+- Full-Stack REST Architecture & 300K+ Species DB: Built a standalone Node.js REST backend with HMAC token auth and integrated Wikipedia & botanical APIs to serve real-time search, category filters, and detailed care guides across 300,000+ plant species.
+- SEO & Open Graph Optimization: Implemented structured Open Graph (OG) meta tags, Twitter Cards, and dynamic social preview banner cards (1024x526), achieving maximum search visibility and social media share preview fidelity on Vercel.`,
   },
   {
     section: 'project-portfolio',
     content: `Featured Project 2: Interactive 3D Personal Portfolio
 Live Demo Link: [3D Portfolio](https://sumanthreddykasireddy.vercel.app)
-Technologies: React.js | Three.js (React Three Fiber) | GSAP | Tailwind CSS | EmailJS | Vercel
+Technologies: React.js | Three.js (React Three Fiber) | GSAP | Tailwind CSS | Jina AI | Supabase pgvector | Groq LLM | EmailJS | Vercel
 URL: https://sumanthreddykasireddy.vercel.app
 
 Key Achievements & Engineering Highlights:
-- Interactive 3D Graphics: Built an immersive 3D hero section utilizing React Three Fiber featuring a mechanical keyboard model with real-time mouse-tracking rotation and dynamic ambient lighting.
+- Interactive 3D Graphics: Built an immersive 3D hero section utilizing React Three Fiber featuring a mechanical keyboard model and an interactive rotating globe model with dynamic ambient lighting.
 - Scroll-Driven Animations: Implemented fluid micro-interactions and scroll-triggered motion effects (GSAP SplitText, BorderGlow carousel) across Hero, About, Work, and Contact sections.
-- AI Chatbot & SEO Optimization: Integrated an AI conversational assistant for instant inquiry resolution and configured structured SEO metadata, achieving high performance and search visibility on Vercel.
+- RAG-Based AI Assistant & SEO Optimization: Engineered a RAG-based AI assistant using Jina AI embeddings and Supabase pgvector for semantic search, with Groq for real-time LLM inference, and configured structured SEO metadata, achieving high performance and search visibility on Vercel.
 - Performance Architecture: Engineered lazy-loading architecture to optimize bundle sizes and improve initial page load performance.`,
   },
   {

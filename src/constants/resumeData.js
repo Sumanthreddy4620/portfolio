@@ -14,22 +14,19 @@ export const resumeData = {
   portfolio: "https://sumanthreddykasireddy.vercel.app",
 
   summary: `
-    Performance-driven Computer Science undergraduate with hands-on expertise engineering full-stack, 
-    responsive, and animation-rich web applications using React.js, Node.js, REST APIs, Supabase (PostgreSQL), 
-    Three.js, and GSAP. Strong foundation in Data Structures, Algorithms, and System Design principles, 
-    backed by consistent competitive programming in C++. Passionate about building highly scalable, secure, 
-    and visually captivating digital products that solve real-world problems.
+    Full-stack developer specializing in AI-integrated, animation-rich web applications, with hands-on expertise using React.js, Node.js, REST APIs, Supabase (PostgreSQL), Three.js, and GSAP. Strong foundation in Data Structures, Algorithms, and System Design principles, backed by consistent competitive programming in C++. Passionate about building highly scalable, secure, and visually captivating digital products that solve real-world problems.
   `,
 
   skills: {
     languages: ["C++", "C", "JavaScript (ES6+)", "SQL"],
-    frameworks: ["React.js", "Node.js", "Express.js", "REST APIs", "Three.js (React Three Fiber)", "GSAP", "Tailwind CSS"],
+    frameworks: ["React.js", "Node.js", "Express.js", "REST APIs", "Three.js (React Three Fiber)", "GSAP", "Tailwind CSS", "Canvas API"],
+    aiAndCloud: ["Gemini Pro / Vision API", "Supabase (PostgreSQL)", "Vercel", "Render"],
     databasesAndCloud: ["Supabase (PostgreSQL)", "Vercel", "Render"],
-    toolsAndPractices: ["Git", "GitHub", "JWT Authentication", "Data Structures & Algorithms", "Object-Oriented Programming", "System Design"],
+    toolsAndPractices: ["Git", "GitHub", "JWT / Token Authentication", "Data Structures & Algorithms", "Object-Oriented Programming", "System Design"],
     comfortable: [
-      "React.js", "Node.js", "Express.js", "REST APIs", "Supabase (PostgreSQL)",
-      "Three.js (React Three Fiber)", "GSAP", "Tailwind CSS", "JavaScript (ES6+)",
-      "C++", "C", "SQL", "Git", "GitHub", "JWT Authentication", "Vercel", "Render",
+      "React.js", "Node.js", "Express.js", "REST APIs", "Gemini Pro / Vision API", "Supabase (PostgreSQL)",
+      "Three.js (React Three Fiber)", "GSAP", "Tailwind CSS", "Canvas API", "JavaScript (ES6+)",
+      "C++", "C", "SQL", "Git", "GitHub", "JWT / Token Authentication", "Vercel", "Render",
       "Data Structures & Algorithms", "Object-Oriented Programming"
     ],
     learning: [
@@ -61,34 +58,24 @@ export const resumeData = {
 
   projects: [
     {
-      name: "Plantio — Botanical Care & Plant Intelligence Platform",
-      url: "https://plantio.vercel.app",
-      description:
-        "Engineered a responsive full-stack web application integrating iNaturalist and Wikipedia REST APIs to deliver " +
-        "real-time search, category filtering, and pagination across 300,000+ plant species. Built a standalone Node.js backend " +
-        "with JWT authentication and integrated Supabase (PostgreSQL) for persistent user accounts, watering schedule tracking, " +
-        "and cross-device session synchronization. Developed an automated inference module parsing taxonomic metadata to dynamically " +
-        "generate customized watering frequencies, toxicity warnings, and light requirement guides for each species. Implemented " +
-        "responsive user plant dashboards with custom photo uploads, watering reminder modal editors, and mobile-optimized grid layouts.",
-      tech: ["React.js", "Node.js", "Supabase (PostgreSQL)", "REST API", "iNaturalist API", "Vercel", "Render", "JWT Authentication"],
-    },
-    {
       name: "Interactive 3D Personal Portfolio",
       url: "https://sumanthreddykasireddy.vercel.app",
       description:
-        "Built an immersive 3D hero section utilizing React Three Fiber featuring a mechanical keyboard model with real-time " +
-        "mouse-tracking rotation and dynamic ambient lighting. Implemented fluid micro-interactions and scroll-triggered motion " +
-        "effects (GSAP SplitText, BorderGlow carousel) across Hero, About, Work, and Contact sections. Integrated an AI conversational " +
-        "assistant for instant inquiry resolution and configured structured SEO metadata, achieving high performance and search visibility on Vercel.",
-      tech: ["React.js", "Three.js (React Three Fiber)", "GSAP", "Tailwind CSS", "EmailJS", "Vercel"],
+        "Built an immersive 3D hero section utilizing React Three Fiber featuring a mechanical keyboard model and an interactive rotating globe model with dynamic ambient lighting. " +
+        "Implemented fluid micro-interactions and scroll-triggered motion effects (GSAP SplitText, BorderGlow carousel) across Hero, About, Work, and Contact sections. " +
+        "Engineered a RAG-based AI assistant using Jina AI embeddings and Supabase pgvector for semantic search, with Groq for real-time LLM inference.",
+      tech: ["React.js", "Three.js (React Three Fiber)", "GSAP", "Tailwind CSS", "Jina AI", "Supabase pgvector", "Groq LLM", "EmailJS", "Vercel"],
     },
     {
-      name: "Cocktail-Themed Motion Landing Page",
-      url: "https://mojito-velvetpour.vercel.app",
+      name: "Plantio — AI-Powered Botanical & Plant Care Platform",
+      url: "https://plantio-plants.vercel.app",
       description:
-        "Designed and developed an animated marketing landing page featuring scroll-based storytelling, custom GSAP timelines, " +
-        "and smooth parallax transitions to optimize visual pacing and user engagement.",
-      tech: ["React.js", "GSAP", "Vanilla CSS"],
+        "Engineered an AI Doctor gateway utilizing Gemini Vision API to analyze plant leaf images and text queries in real time, detecting 740+ plant diseases, pests, and nutrient deficiencies with organic remedy suggestions. " +
+        "Built a floating responsive AI assistant modal (AIChatModal) available across all pages for instant interactive plant troubleshooting, care advice, and botanical Q&A. " +
+        "Developed a multi-stage visual growth timeline with client-side HTML5 Canvas image compression (JPEG 0.7, max 450px), optimizing photo uploads to under 30KB for instant cloud sync to Supabase PostgreSQL. " +
+        "Implemented dynamic watering status badges (Watered, Due Today, Overdue) with 1-click single and batch 'Water All' actions. " +
+        "Built a standalone Node.js REST backend with HMAC token auth, integrating Wikipedia & botanical APIs to serve 300,000+ plant species.",
+      tech: ["React.js", "Node.js", "Gemini AI Vision API", "Supabase (PostgreSQL)", "REST API", "HTML5 Canvas API", "Vercel", "Render", "JWT / HMAC Token Auth"],
     },
     {
       name: "Competitive Programming & Algorithmic Problem Solving",
@@ -106,6 +93,7 @@ export const resumeData = {
     "Algorithmic Problem Solving & Competitive Programming",
     "Full-Stack Web Development & API Architecture",
     "3D Graphics & Creative Web Design (Three.js / GSAP)",
+    "AI Integration & LLM RAG Pipelines (Gemini Vision API, Jina AI, Groq)",
     "Physical fitness routines (daily skipping workouts)",
     "Strategy gaming (Clash of Clans)",
     "PC Hardware & Workspace Aesthetics",
@@ -114,12 +102,6 @@ export const resumeData = {
   availability:
     "Open to engineering internship opportunities immediately. Open to full-time roles starting post-graduation in September 2027.",
 };
-
-// ============================================================
-//  EXTENDED KNOWLEDGE BASE — WEB PORTFOLIO & PROFESSIONAL PROFILE
-//  Rich, structured details about the website and Sumanth's philosophy.
-//  Enables the chatbot to answer technical inquiries with high precision.
-// ============================================================
 
 export const knowledgeBase = `
 ────────────────────────────────────────────────────────────
@@ -138,38 +120,34 @@ Education:
   Narayana Junior College, Madhapur, Hyderabad
 
 Professional Summary:
-Performance-driven Computer Science undergraduate with hands-on expertise engineering full-stack, responsive, and animation-rich web applications using React.js, Node.js, REST APIs, Supabase (PostgreSQL), Three.js, and GSAP. Strong foundation in Data Structures, Algorithms, and System Design principles, backed by consistent competitive programming in C++. Passionate about building highly scalable, secure, and visually captivating digital products that solve real-world problems.
+Full-stack developer specializing in AI-integrated, animation-rich web applications, with hands-on expertise using React.js, Node.js, REST APIs, Supabase (PostgreSQL), Three.js, and GSAP. Strong foundation in Data Structures, Algorithms, and System Design principles, backed by consistent competitive programming in C++. Passionate about building highly scalable, secure, and visually captivating digital products that solve real-world problems.
 
 Technical Skills:
 - Languages: C++, C, JavaScript (ES6+), SQL
-- Frameworks & Libraries: React.js, Node.js, Express.js, REST APIs, Three.js (React Three Fiber), GSAP, Tailwind CSS
-- Databases & Cloud: Supabase (PostgreSQL), Vercel, Render
-- Tools & Practices: Git, GitHub, JWT Authentication, Data Structures & Algorithms, Object-Oriented Programming, System Design
+- Frameworks & Libraries: React.js, Node.js, Express.js, REST APIs, Three.js (React Three Fiber), GSAP, Tailwind CSS, Canvas API
+- AI & Cloud Services: Gemini Pro / Vision API, Supabase (PostgreSQL), Vercel, Render
+- Tools & Practices: Git, GitHub, JWT / Token Authentication, Data Structures & Algorithms, Object-Oriented Programming, System Design
 
 ────────────────────────────────────────────────────────────
 FEATURED PROJECTS
 ────────────────────────────────────────────────────────────
-1. PLANTIO — BOTANICAL CARE & PLANT INTELLIGENCE PLATFORM
-   Tech Stack: React.js, Node.js, Supabase (PostgreSQL), REST API, iNaturalist API, Vercel, Render, JWT Authentication
+1. INTERACTIVE 3D PERSONAL PORTFOLIO
+   Tech Stack: React.js, Three.js (React Three Fiber), GSAP, Tailwind CSS, Jina AI, Supabase pgvector, Groq LLM, EmailJS, Vercel
    Key Highlights:
-   • Full-Stack Architecture & API Integration: Engineered a responsive web application integrating iNaturalist and Wikipedia REST APIs to deliver real-time search, category filtering, and pagination across 300,000+ plant species.
-   • Cloud Database & Persistent Auth: Built a standalone Node.js backend with JWT authentication and integrated Supabase (PostgreSQL) for persistent user accounts, watering schedule tracking, and cross-device session synchronization.
-   • Algorithmic Care Engine: Developed an automated inference module parsing taxonomic metadata to dynamically generate customized watering frequencies, toxicity warnings, and light requirement guides for each species.
-   • Interactive Care Tracker: Implemented responsive user plant dashboards with custom photo uploads, watering reminder modal editors, and mobile-optimized grid filling layouts.
-
-2. INTERACTIVE 3D PERSONAL PORTFOLIO
-   Tech Stack: React.js, Three.js (React Three Fiber), GSAP, Tailwind CSS, EmailJS, Vercel
-   Key Highlights:
-   • Interactive 3D Graphics: Built an immersive 3D hero section utilizing React Three Fiber featuring a mechanical keyboard model with real-time mouse-tracking rotation and dynamic ambient lighting.
+   • Interactive 3D Graphics: Built immersive 3D visuals utilizing React Three Fiber, including a mechanical keyboard hero model and an interactive rotating globe model, with dynamic ambient lighting.
    • Scroll-Driven Animations: Implemented fluid micro-interactions and scroll-triggered motion effects (GSAP SplitText, BorderGlow carousel) across Hero, About, Work, and Contact sections.
-   • AI Chatbot & SEO Optimization: Integrated an AI conversational assistant for instant inquiry resolution and configured structured SEO metadata, achieving high performance and search visibility on Vercel.
+   • RAG-Based AI Assistant: Engineered a RAG-based AI assistant using Jina AI embeddings and Supabase pgvector for semantic search, with Groq for real-time LLM inference.
 
-3. COCKTAIL-THEMED MOTION LANDING PAGE (VELVET POUR)
-   Tech Stack: React.js, GSAP, Vanilla CSS
+2. PLANTIO — AI-POWERED BOTANICAL & PLANT CARE PLATFORM
+   Tech Stack: React.js, Node.js, Gemini AI Vision API, Supabase (PostgreSQL), REST APIs, HTML5 Canvas API, Vercel, Render, JWT / HMAC Token Auth
    Key Highlights:
-   • Designed and developed an animated marketing landing page featuring scroll-based storytelling, custom GSAP timelines, and smooth parallax transitions to optimize visual pacing and user engagement.
+   • AI Disease Diagnosis & Botanical Scanner: Engineered an AI Doctor gateway utilizing Gemini Vision API to analyze plant leaf images and text queries in real time, detecting 740+ plant diseases, pests, and nutrient deficiencies with organic remedy suggestions.
+   • Interactive Site-Wide AI Chatbot: Built a floating, responsive AI assistant modal (AIChatModal) available across all pages for instant interactive plant troubleshooting, context-aware care advice, and botanical Q&A.
+   • Photo Growth Journal & Canvas Compression: Developed a multi-stage visual growth timeline (Day 1 to Year 1) with client-side HTML5 Canvas image compression (JPEG 0.7, max 450px), optimizing photo uploads to under 30KB for instant cloud sync to Supabase PostgreSQL.
+   • Smart Watering Tracker & Batch Operations: Implemented dynamic watering status badges (Watered, Due Today, Overdue) with 1-click single and batch "Water All" actions, syncing custom care frequencies across user devices.
+   • Full-Stack REST Architecture & 300K+ Species DB: Built a standalone Node.js REST backend with HMAC token auth and integrated Wikipedia & botanical APIs to serve real-time search, category filters, and detailed care guides across 300,000+ plant species.
 
-4. COMPETITIVE PROGRAMMING & ALGORITHMIC PROBLEM SOLVING
+3. COMPETITIVE PROGRAMMING & ALGORITHMIC PROBLEM SOLVING
    Tech Stack: C++, Data Structures & Algorithms, LeetCode, CodeChef
    Key Highlights:
    • Solved 100+ algorithmic problems spanning Arrays, Strings, Dynamic Programming, Binary Search, Graph Traversals, and String Matching (e.g., Rotated Sorted Array Search, House Robber, Regular Expression Matching).
@@ -185,10 +163,10 @@ CAREER OBJECTIVES & AVAILABILITY
 PRE-ANSWERED FAQS
 ────────────────────────────────────────────────────────────
 Q: What sets your projects apart?
-A: Sumanth builds complete, full-stack applications from scratch — such as Plantio (a 300k+ plant intelligence platform with JWT auth and Supabase PostgreSQL) and his interactive 3D portfolio with custom Three.js graphics and GSAP animations.
+A: Sumanth builds complete, full-stack AI-integrated applications from scratch — such as Plantio (with Gemini AI Vision API leaf diagnostics, Canvas image compression under 30KB, and Supabase PostgreSQL) and his interactive 3D portfolio (with custom Three.js graphics, GSAP animations, and a RAG AI assistant).
 
 Q: What is your primary tech stack?
-A: React.js, Node.js, Express.js, Supabase (PostgreSQL), REST APIs, Three.js, GSAP, Tailwind CSS, C++, and SQL.
+A: React.js, Node.js, Express.js, Supabase (PostgreSQL), Gemini Pro / Vision API, REST APIs, Three.js, GSAP, Tailwind CSS, Canvas API, C++, and SQL.
 
 Q: Do you have competitive programming experience?
 A: Yes! Sumanth has solved 100+ algorithmic problems on LeetCode and CodeChef in C++, covering Arrays, Strings, Dynamic Programming, Binary Search, Graph Traversals, and String Matching.
