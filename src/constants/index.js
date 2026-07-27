@@ -22,29 +22,33 @@ export const navLinks = [
 ];
 export const projects = [
     {
-        title: "Plantio — Botanical Care & Plant Intelligence Platform",
+        title: "Plantio — AI-Powered Botanical & Plant Care Platform",
         url: "https://plantio-plants.vercel.app",
         description:
-            "A responsive full-stack web application delivering real-time search, category filtering, and smart care guidance across 300,000+ live plant species and 740+ disease/pest diagnostics.",
+            "Engineered a responsive full-stack AI plant intelligence platform featuring a Gemini Vision API leaf scanner, interactive site-wide AI chatbot modal, HTML5 Canvas growth timeline, and smart watering tracking across 300,000+ species.",
         highlights: [
             {
-                title: "Full-Stack Architecture & APIs",
-                text: "Integrated iNaturalist and Wikipedia REST APIs for real-time search & taxonomy metadata across 300,000+ species."
+                title: "AI Disease Diagnosis & Botanical Scanner",
+                text: "Engineered an AI Doctor gateway utilizing Gemini Vision API to analyze plant leaf images and text queries in real time, detecting 740+ plant diseases, pests, and nutrient deficiencies with organic remedy suggestions."
             },
             {
-                title: "Cloud DB & Persistent Auth",
-                text: "Built a Node.js backend with JWT authentication & Supabase (PostgreSQL) for persistent user accounts & schedule sync."
+                title: "Interactive Site-Wide AI Chatbot",
+                text: "Built a floating, responsive AI assistant modal (AIChatModal) available across all pages for instant interactive plant troubleshooting, context-aware care advice, and botanical Q&A."
             },
             {
-                title: "Algorithmic Care Engine",
-                text: "Automated inference module generating dynamic watering frequencies, toxicity warnings, and light guides."
+                title: "Photo Growth Journal & Canvas Compression",
+                text: "Developed a multi-stage visual growth timeline (Day 1 to Year 1) with client-side HTML5 Canvas image compression (JPEG 0.7, max 450px), optimizing photo uploads to under 30KB for instant cloud sync to Supabase PostgreSQL."
             },
             {
-                title: "Interactive Care Dashboards",
-                text: "User plant management dashboards with photo uploads, watering reminder modal editors, and grid filling layouts."
+                title: "Smart Watering Tracker & Batch Operations",
+                text: "Implemented dynamic watering status badges (Watered, Due Today, Overdue) with 1-click single and batch 'Water All' actions, syncing custom care frequencies across user devices."
+            },
+            {
+                title: "Full-Stack REST Architecture & 300K+ Species DB",
+                text: "Built a standalone Node.js REST backend with HMAC token auth and integrated Wikipedia & botanical APIs to serve real-time search, category filters, and detailed care guides across 300,000+ plant species."
             }
         ],
-        tags: ["React.js", "Node.js", "Supabase", "REST API", "iNaturalist API", "JWT", "Tailwind CSS"],
+        tags: ["React.js", "Node.js", "Gemini AI Vision API", "Supabase", "REST API", "HTML5 Canvas API", "Render", "Vercel"],
         image: "/assets/plantio.png",
         glowColor: "140 80 50",
         colors: [
@@ -62,22 +66,22 @@ export const projects = [
         title: "Interactive 3D Personal Portfolio",
         url: "https://sumanthreddykasireddy.vercel.app",
         description:
-            "An immersive developer portfolio featuring a custom 3D mechanical keyboard hero section with mouse tracking, GSAP scroll-driven animations, an AI chatbot, and SEO optimization on Vercel.",
+            "An immersive developer portfolio featuring a custom 3D mechanical keyboard & globe hero section, GSAP scroll-driven animations, a RAG-based AI assistant, and SEO optimization on Vercel.",
         highlights: [
             {
-                title: "3D Graphics & Lighting",
-                text: "Built with React Three Fiber featuring dynamic ambient lighting and real-time mouse-tracking model rotation."
+                title: "Interactive 3D Graphics",
+                text: "Built immersive 3D visuals utilizing React Three Fiber, including a mechanical keyboard hero model and an interactive rotating globe model, with dynamic ambient lighting."
             },
             {
                 title: "Scroll-Driven Animations",
-                text: "GSAP SplitText and BorderGlow carousel micro-interactions across Hero, About, Work, and Contact sections."
+                text: "Implemented fluid micro-interactions and scroll-triggered motion effects (GSAP SplitText, BorderGlow carousel) across Hero, About, Work, and Contact sections."
             },
             {
-                title: "AI Chatbot Assistant",
-                text: "Serverless RAG pipeline combining Jina AI vector embeddings, Supabase pgvector, and Groq Llama-3.3 LLM."
+                title: "RAG-Based AI Assistant",
+                text: "Engineered a RAG-based AI assistant using Jina AI embeddings and Supabase pgvector for semantic search, with Groq for real-time LLM inference."
             }
         ],
-        tags: ["React.js", "Three.js", "GSAP", "Tailwind CSS", "EmailJS", "Vercel"],
+        tags: ["React.js", "Three.js", "GSAP", "Tailwind CSS", "Jina AI", "Supabase pgvector", "Groq LLM", "Vercel"],
         image: "/assets/portfolio.png",
         glowColor: "160 90 65",
         colors: [
@@ -92,10 +96,39 @@ export const projects = [
         ],
     },
     {
+        title: "Competitive Programming & Algorithmic Problem Solving",
+        url: "https://leetcode.com/u/Sumanthreddy4620/",
+        description:
+            "Solved 100+ algorithmic problems spanning Arrays, Strings, Dynamic Programming, Binary Search, Graph Traversals, and String Matching on LeetCode and CodeChef in C++.",
+        highlights: [
+            {
+                title: "Algorithmic Breadth",
+                text: "Solved 100+ algorithmic problems spanning Arrays, Strings, Dynamic Programming, Binary Search, Graph Traversals, and String Matching (e.g., Rotated Sorted Array Search, House Robber, Regular Expression Matching)."
+            },
+            {
+                title: "Optimization & Complexity Analysis",
+                text: "Consistently practice algorithm optimization, time & space complexity analysis, and clean implementation in C++."
+            }
+        ],
+        tags: ["C++", "Data Structures", "Algorithms", "LeetCode", "CodeChef", "Dynamic Programming", "Graph Traversals"],
+        image: "/assets/terminal.png",
+        glowColor: "210 80 60",
+        colors: [
+            "#ef4444",
+            "#f97316",
+            "#f59e0b",
+            "#10b981",
+            "#06b6d4",
+            "#3b82f6",
+            "#8b5cf6",
+            "#ec4899",
+        ],
+    },
+    {
         title: "Velvet Pour — Motion Landing Page",
         url: "https://mojito-velvetpour.vercel.app",
         description:
-            "A premium beverage landing page showcasing cinematic animations, smooth scroll-linked movements, elegant custom typography layouts, and immersive visual storytelling.",
+            "Designed and developed an animated marketing landing page featuring scroll-based storytelling, custom GSAP timelines, and smooth parallax transitions to optimize visual pacing and user engagement.",
         highlights: [
             {
                 title: "Cinematic Motion",

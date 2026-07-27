@@ -119,7 +119,7 @@ const About = () => {
                         <div>
                             <p className="grid-headtext">Tech Stack</p>
                             <p className="grid-subtext">
-                                My toolkit includes C, C++, Python, JavaScript, React, and full-stack development technologies. I enjoy turning ideas into functional applications and am currently exploring React Three Fiber to create immersive 3D experiences on the web.
+                                My toolkit includes C++, C, JavaScript (ES6+), SQL, React.js, Node.js, Express.js, REST APIs, Supabase (PostgreSQL), Three.js (React Three Fiber), GSAP, Tailwind CSS, Canvas API, and Gemini Pro / Vision API.
                             </p>
                         </div>
                     </GridCard>
