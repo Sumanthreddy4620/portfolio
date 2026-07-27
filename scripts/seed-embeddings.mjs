@@ -45,7 +45,7 @@ Title: Computer Science Undergraduate | Full-Stack Developer & Competitive Progr
 Phone: +91 7013410428
 Email: k.sumanthreddy4620@gmail.com
 Location: Miryalguda, India 508207
-LinkedIn: https://www.linkedin.com/in/sumanthreddy-kasireddy-72b6662a9/
+LinkedIn: https://www.linkedin.com/in/sumanthreddykasireddy/
 GitHub: https://github.com/Sumanthreddy4620
 Portfolio: https://sumanthreddykasireddy.vercel.app`,
   },
@@ -231,7 +231,7 @@ Q: What tech stack does Sumanth use?
 A: Languages: C++, C, JavaScript (ES6+), SQL. Frameworks & Tools: React.js, Node.js, Express.js, REST APIs, Supabase (PostgreSQL), Three.js (React Three Fiber), GSAP, Tailwind CSS, Canvas API, Git, GitHub, Vercel, Render, JWT.
 
 Q: How can I contact Sumanth?
-A: Phone: +91 7013410428 | Email: k.sumanthreddy4620@gmail.com | LinkedIn: https://www.linkedin.com/in/sumanthreddy-kasireddy-72b6662a9/ | GitHub: https://github.com/Sumanthreddy4620`,
+A: Phone: +91 7013410428 | Email: k.sumanthreddy4620@gmail.com | LinkedIn: https://www.linkedin.com/in/sumanthreddykasireddy/ | GitHub: https://github.com/Sumanthreddy4620`,
   },
 ];
 

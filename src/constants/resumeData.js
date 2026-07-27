@@ -9,7 +9,7 @@ export const resumeData = {
   location: "Miryalguda, India 508207",
   email: "k.sumanthreddy4620@gmail.com",
   phone: "+91 7013410428",
-  linkedin: "https://www.linkedin.com/in/sumanthreddy-kasireddy-72b6662a9/",
+  linkedin: "https://www.linkedin.com/in/sumanthreddykasireddy/",
   github: "https://github.com/Sumanthreddy4620",
   portfolio: "https://sumanthreddykasireddy.vercel.app",
 
@@ -109,7 +109,7 @@ SUMANTH REDDY KASIREDDY — PROFESSIONAL PROFILE
 ────────────────────────────────────────────────────────────
 Name: Sumanth Reddy Kasireddy
 Phone: +91 7013410428 | Email: k.sumanthreddy4620@gmail.com | Location: Miryalguda, India 508207
-LinkedIn: https://www.linkedin.com/in/sumanthreddy-kasireddy-72b6662a9/
+LinkedIn: https://www.linkedin.com/in/sumanthreddykasireddy/
 GitHub: https://github.com/Sumanthreddy4620
 Portfolio: https://sumanthreddykasireddy.vercel.app
 

@@ -134,6 +134,7 @@ RULES:
   • Plantio: [Plantio](https://plantio-plants.vercel.app)
   • Personal Portfolio: [Portfolio](https://sumanthreddykasireddy.vercel.app)
 - Note: Sumanth's featured projects are Plantio and his 3D Interactive Portfolio. Do NOT mention Velvet Pour or Cocktail landing page.
+- For contact/profiles, share: LinkedIn: https://www.linkedin.com/in/sumanthreddykasireddy/ | GitHub: https://github.com/Sumanthreddy4620
 
 RELEVANT CONTEXT (retrieved from knowledge base):
 ${context}

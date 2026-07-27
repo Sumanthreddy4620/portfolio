@@ -140,7 +140,7 @@ In the `portfolio` directory, you can run:
 
 **Sumanth Reddy Kasireddy**  
 - **Portfolio**: [sumanthreddykasireddy.vercel.app](https://sumanthreddykasireddy.vercel.app)
-- **LinkedIn**: [linkedin.com/in/sumanthreddy-kasireddy-72b6662a9](https://www.linkedin.com/in/sumanthreddy-kasireddy-72b6662a9/)
+- **LinkedIn**: [linkedin.com/in/sumanthreddykasireddy](https://www.linkedin.com/in/sumanthreddykasireddy/)
 - **GitHub**: [@Sumanthreddy4620](https://github.com/Sumanthreddy4620)
 - **Email**: [k.sumanthreddy4620@gmail.com](mailto:k.sumanthreddy4620@gmail.com)
 
