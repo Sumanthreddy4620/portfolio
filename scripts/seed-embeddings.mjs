@@ -144,26 +144,6 @@ Key Achievements & Engineering Highlights:
 - Performance Architecture: Engineered lazy-loading architecture to optimize bundle sizes and improve initial page load performance.`,
   },
   {
-    section: 'project-velvetpour',
-    content: `Featured Project 3: Cocktail-Themed Motion Landing Page (also known as Velvet Pour)
-Live Demo Link: [Velvet Pour](https://mojito-velvetpour.vercel.app)
-Technologies: React.js | GSAP | Vanilla CSS
-URL: https://mojito-velvetpour.vercel.app
-
-Key Achievements & Engineering Highlights:
-- Designed and developed an animated marketing landing page featuring scroll-based storytelling, custom GSAP timelines, and smooth parallax transitions to optimize visual pacing and user engagement.`,
-  },
-  {
-    section: 'project-competitive-programming',
-    content: `Featured Project 4: Competitive Programming & Algorithmic Problem Solving
-Technologies: C++ | Data Structures & Algorithms | LeetCode | CodeChef
-
-Key Achievements & Highlights:
-- Solved 100+ algorithmic problems spanning Arrays, Strings, Dynamic Programming, Binary Search, Graph Traversals, and String Matching.
-- Example Problems Solved: Rotated Sorted Array Search, House Robber, Regular Expression Matching.
-- Consistently practices algorithm optimization, complexity analysis, and clean implementation in C++.`,
-  },
-  {
     section: 'portfolio-architecture',
     content: `Portfolio Website Architecture & Technical Details:
 
@@ -180,7 +160,7 @@ Key Achievements & Highlights:
    - GSAP ScrollTrigger card entrance animations
 
 3. WORK (PROJECTS) SECTION:
-   - Interactive projects carousel showcasing Plantio, 3D Portfolio, Velvet Pour, and Competitive Programming
+   - Interactive projects carousel showcasing Plantio and 3D Interactive Portfolio
    - Scroll-triggered BorderGlow animated gradient cards
 
 4. AI CHATBOT & BACKEND:
@@ -241,16 +221,14 @@ Q: Can I download or view Sumanth's resume?
 A: Yes! Download it here: [Sumanth's Resume](https://sumanthreddykasireddy.vercel.app/resume.pdf)
 
 Q: What are Sumanth's main projects?
-A: 1. Plantio: [Plantio — Botanical Care Platform](https://plantio-plants.vercel.app) (React, Node.js, Supabase PostgreSQL, JWT, REST APIs for 300k+ plant species)
-2. Personal Portfolio: [Portfolio](https://sumanthreddykasireddy.vercel.app) (React Three Fiber, GSAP, AI Chatbot)
-3. Velvet Pour: [Cocktail-Themed Motion Landing Page](https://mojito-velvetpour.vercel.app) (GSAP, Vanilla CSS)
-4. Competitive Programming (100+ solved problems on LeetCode/CodeChef in C++)
+A: 1. Plantio: [Plantio — Botanical Care Platform](https://plantio-plants.vercel.app) (React.js, Node.js, Gemini Vision AI, Supabase PostgreSQL, HTML5 Canvas API)
+2. Personal Portfolio: [Portfolio](https://sumanthreddykasireddy.vercel.app) (React Three Fiber, GSAP, Jina AI, Supabase pgvector, Groq LLM)
 
 Q: What is Sumanth's educational background?
 A: B.Tech in Computer Science & Engineering at SR International Institute of Technology, Hyderabad (Expected September 2027). Intermediate MPC at Narayana Junior College, Madhapur, Hyderabad (April 2023).
 
 Q: What tech stack does Sumanth use?
-A: Languages: C++, C, JavaScript (ES6+), SQL. Frameworks & Tools: React.js, Node.js, Express.js, REST APIs, Supabase (PostgreSQL), Three.js (React Three Fiber), GSAP, Tailwind CSS, Git, GitHub, Vercel, Render, JWT.
+A: Languages: C++, C, JavaScript (ES6+), SQL. Frameworks & Tools: React.js, Node.js, Express.js, REST APIs, Supabase (PostgreSQL), Three.js (React Three Fiber), GSAP, Tailwind CSS, Canvas API, Git, GitHub, Vercel, Render, JWT.
 
 Q: How can I contact Sumanth?
 A: Phone: +91 7013410428 | Email: k.sumanthreddy4620@gmail.com | LinkedIn: https://www.linkedin.com/in/sumanthreddy-kasireddy-72b6662a9/ | GitHub: https://github.com/Sumanthreddy4620`,
