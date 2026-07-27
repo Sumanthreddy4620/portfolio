@@ -13,17 +13,11 @@ import {useGSAP} from "@gsap/react";
 
 const KeyBoardWrapper = ({ scale, position, rotation }) => {
     const ref = useRef();
-    const isTouchDevice = useMediaQuery({ maxWidth: 1024 });
 
-    useFrame(({ mouse }) => {
+    useFrame(() => {
         if (ref.current) {
-            if (isTouchDevice) {
-                ref.current.rotation.y = rotation[1];
-                ref.current.rotation.x = rotation[0];
-            } else {
-                ref.current.rotation.y = rotation[1] + mouse.x * 0.1;
-                ref.current.rotation.x = rotation[0] + (-mouse.y * 0.1);
-            }
+            ref.current.rotation.y = rotation[1];
+            ref.current.rotation.x = rotation[0];
         }
     });
 
