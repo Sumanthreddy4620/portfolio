@@ -53,7 +53,7 @@ Portfolio: https://sumanthreddykasireddy.vercel.app`,
     section: 'resume-download',
     content: `Sumanth's Resume / CV Download:
 If a visitor asks for Sumanth's resume, CV, or wants to download his resume, provide this direct link:
-https://sumanthreddykasireddy.vercel.app/resume.pdf
+https://sumanthreddykasireddy.vercel.app/resume.pdf?v=20260728
 
 The resume is a PDF document that can be viewed or downloaded directly from the portfolio website.`,
   },
@@ -218,7 +218,7 @@ Focus: Clean, bug-free implementations, optimal time/space complexity, and stron
     content: `Frequently Asked Questions about Sumanth:
 
 Q: Can I download or view Sumanth's resume?
-A: Yes! Download it here: [Sumanth's Resume](https://sumanthreddykasireddy.vercel.app/resume.pdf)
+A: Yes! Download it here: [Sumanth's Resume](https://sumanthreddykasireddy.vercel.app/resume.pdf?v=20260728)
 
 Q: What are Sumanth's main projects?
 A: 1. Plantio: [Plantio — Botanical Care Platform](https://plantio-plants.vercel.app) (React.js, Node.js, Gemini Vision AI, Supabase PostgreSQL, HTML5 Canvas API)
