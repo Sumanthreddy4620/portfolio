@@ -1,11 +1,12 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Globe from 'react-globe.gl';
 import Button from '../components/Button.jsx';
+import TechStack3D from '../components/TechStack3D.jsx';
 import { SplitText, ScrollTrigger } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
-const GridCard = ({ children, spotX, spotY, color, gridRef, isInGrid }) => {
+const GridCard = ({ children, spotX, spotY, color, gridRef, isInGrid, isDesktop }) => {
     const cardRef = useRef(null);
 
     const getLocalPos = () => {
@@ -37,13 +38,16 @@ const GridCard = ({ children, spotX, spotY, color, gridRef, isInGrid }) => {
 
     return (
         <div ref={cardRef} className="grid-container h-full relative overflow-hidden">
-            <div
-                className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] transition-opacity duration-300"
-                style={{
-                    opacity: isInGrid && isNear() ? 1 : 0,
-                    background: `radial-gradient(350px circle at ${x}px ${y}px, ${color}, transparent 70%)`,
-                }}
-            />
+            {/* Spotlight effect ONLY enabled on desktop/pointer devices */}
+            {isDesktop && (
+                <div
+                    className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] transition-opacity duration-300"
+                    style={{
+                        opacity: isInGrid && isNear() ? 1 : 0,
+                        background: `radial-gradient(350px circle at ${x}px ${y}px, ${color}, transparent 70%)`,
+                    }}
+                />
+            )}
             {children}
         </div>
     );
@@ -53,7 +57,18 @@ const About = () => {
     const [hasCopied, setHasCopied] = useState(false);
     const [cursor, setCursor] = useState({ x: 0, y: 0 });
     const [isInGrid, setIsInGrid] = useState(false);
+    const [isDesktop, setIsDesktop] = useState(false);
     const gridRef = useRef(null);
+
+    useEffect(() => {
+        const checkDevice = () => {
+            // Strictly check for desktop devices with real hover mouse pointer
+            setIsDesktop(window.matchMedia('(hover: hover) and (pointer: fine)').matches);
+        };
+        checkDevice();
+        window.addEventListener('resize', checkDevice);
+        return () => window.removeEventListener('resize', checkDevice);
+    }, []);
 
     useGSAP(() => {
         gsap.registerPlugin(SplitText, ScrollTrigger);
@@ -65,8 +80,8 @@ const About = () => {
                 duration: 1,
                 ease: 'power1.inOut',
                 scrollTrigger: {
-                    trigger: card,        // each card is its own trigger
-                    start: 'top 90%',     // fires when top of card hits 90% of viewport
+                    trigger: card,
+                    start: 'top 90%',
                     toggleActions: 'play none none none',
                 },
             });
@@ -80,6 +95,7 @@ const About = () => {
     };
 
     const handleMouseMove = (e) => {
+        if (!isDesktop || !gridRef.current) return;
         const rect = gridRef.current.getBoundingClientRect();
         setCursor({ x: e.clientX - rect.left, y: e.clientY - rect.top });
     };
@@ -89,23 +105,27 @@ const About = () => {
             <div
                 ref={gridRef}
                 onMouseMove={handleMouseMove}
-                onMouseEnter={() => setIsInGrid(true)}
-                onMouseLeave={() => setIsInGrid(false)}
+                onMouseEnter={() => isDesktop && setIsInGrid(true)}
+                onMouseLeave={() => isDesktop && setIsInGrid(false)}
                 className="relative grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full"
             >
-                <div
-                    className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
-                    style={{
-                        opacity: isInGrid ? 1 : 0,
-                        background: `radial-gradient(600px circle at ${cursor.x}px ${cursor.y}px, rgba(255,255,255,0.03), transparent 50%)`,
-                    }}
-                />
+                {/* Background spotlight overlay ONLY on desktop */}
+                {isDesktop && (
+                    <div
+                        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
+                        style={{
+                            opacity: isInGrid ? 1 : 0,
+                            background: `radial-gradient(600px circle at ${cursor.x}px ${cursor.y}px, rgba(255,255,255,0.03), transparent 50%)`,
+                        }}
+                    />
+                )}
 
+                {/* Card 1 - Bio */}
                 <div className="about-card col-span-1 xl:row-span-3 relative z-10">
-                    <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
+                    <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid} isDesktop={isDesktop}>
                         <img src="assets/grid1.png" alt="grid-1" className="w-full sm:h-[276px] h-fit object-contain" />
                         <div>
-                            <p className="grid-headtext">Hi, I'm Sumanthreddy Kasireddy</p>
+                            <p className="grid-headtext">Hi, I'm Sumanth Kasireddy</p>
                             <p className="grid-subtext">
                                 Computer Science student focused on Full-Stack Development, React applications, and interactive web experiences.
                             </p>
@@ -113,20 +133,22 @@ const About = () => {
                     </GridCard>
                 </div>
 
+                {/* Card 2 - Tech Stack */}
                 <div className="about-card col-span-1 xl:row-span-3 relative z-10">
-                    <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
-                        <img src="assets/grid2.png" alt="grid-2" className="w-full sm:h-[276px] h-fit object-contain" />
-                        <div>
-                            <p className="grid-headtext">Tech Stack</p>
+                    <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid} isDesktop={isDesktop}>
+                        <TechStack3D />
+                        <div className="mt-4">
+                            <p className="grid-headtext">Tech Stack & Ecosystem</p>
                             <p className="grid-subtext">
-                                My toolkit includes C++, C, JavaScript (ES6+), SQL, React.js, Node.js, Express.js, REST APIs, Supabase (PostgreSQL), Three.js (React Three Fiber), GSAP, Tailwind CSS, Canvas API, and Gemini Pro / Vision API.
+                                Specialized in building modern full-stack web applications, high-performance 3D experiences, scalable backend APIs, and AI integrations.
                             </p>
                         </div>
                     </GridCard>
                 </div>
 
+                {/* Card 3 - Globe */}
                 <div className="about-card col-span-1 xl:row-span-4 relative z-10">
-                    <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
+                    <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid} isDesktop={isDesktop}>
                         <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center">
                             <Globe
                                 height={326}
@@ -137,19 +159,21 @@ const About = () => {
                                 showGraticules
                                 globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
                                 bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-                            // labelsData={[{ lat: 17.3, lng: 79.1, text: 'Miryalaguda, India', color: 'white', size: 15 }]}
                             />
                         </div>
                         <div>
                             <p className="grid-headtext">Open to Internships & Collaborations</p>
-                            <p className="grid-subtext">I'm based in India and eager to collaborate with developers, startups, and teams worldwide. I'm actively seeking internship opportunities where I can contribute, learn, and grow as a software developer.</p>
+                            <p className="grid-subtext">
+                                I'm based in India and eager to collaborate with developers, startups, and teams worldwide. I'm actively seeking internship opportunities where I can contribute, learn, and grow as a software developer.
+                            </p>
                             <a href="#contact" className="w-fit"><Button name="Contact Me" isBeam containerClass="w-full mt-10" /></a>
                         </div>
                     </GridCard>
                 </div>
 
+                {/* Card 4 - Passion for Coding */}
                 <div className="about-card xl:col-span-2 xl:row-span-3 relative z-10">
-                    <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
+                    <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid} isDesktop={isDesktop}>
                         <img src="assets/grid3.png" alt="grid-3" className="w-full sm:h-[266px] h-fit object-contain" />
                         <div>
                             <p className="grid-headtext">My Passion for Coding</p>
@@ -160,8 +184,9 @@ const About = () => {
                     </GridCard>
                 </div>
 
+                {/* Card 5 - Contact Email */}
                 <div className="about-card xl:col-span-1 xl:row-span-2 relative z-10">
-                    <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid}>
+                    <GridCard spotX={cursor.x} spotY={cursor.y} color="rgba(255,255,255,0.1)" gridRef={gridRef} isInGrid={isInGrid} isDesktop={isDesktop}>
                         <img
                             src="assets/grid4.png"
                             alt="grid-4"
