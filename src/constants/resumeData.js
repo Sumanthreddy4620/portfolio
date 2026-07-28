@@ -172,3 +172,4 @@ Q: Do you have competitive programming experience?
 A: Yes! Sumanth has solved 100+ algorithmic problems on LeetCode and CodeChef in C++, covering Arrays, Strings, Dynamic Programming, Binary Search, Graph Traversals, and String Matching.
 `;
 
+

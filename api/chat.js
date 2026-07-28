@@ -168,3 +168,4 @@ Answer the visitor's question using ONLY the information provided above. If the 
     return res.status(500).json({ error: err.message || 'Internal server error' });
   }
 }
+

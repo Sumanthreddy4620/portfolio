@@ -620,3 +620,4 @@ const TechStack3D = () => {
 };
 
 export default TechStack3D;
+
