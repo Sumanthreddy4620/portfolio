@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Float, Html } from '@react-three/drei';
 import CanvasLoader from './CanvasLoader.jsx';
@@ -58,7 +58,7 @@ const TechIcons = {
     ),
     gemini: (
         <svg className="w-3.5 h-3.5 overflow-visible" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C12 7.523 7.523 12 2 12C7.523 12 12 16.477 12 22C12 16.477 16.477 12 22 12C16.477 12 12 7.523 12 2Z" fill="url(#gemini-sparkle-grad)" />
+            <path d="M12 2C12 7.523 7.523 12 2 12C7.523 12 12 16.477 12 22C12 16.477 16.477 12 22 12C16.477 12 12 7.523 12 0Z" fill="url(#gemini-sparkle-grad)" />
             <defs>
                 <linearGradient id="gemini-sparkle-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
                     <stop stopColor="#4E9FDF" />
@@ -133,7 +133,7 @@ const TechCore = ({ hoveredItem, selectedItem }) => {
     return (
         <group>
             <mesh ref={coreRef}>
-                <icosahedronGeometry args={[0.32, 1]} />
+                <icosahedronGeometry args={[0.30, 1]} />
                 <meshStandardMaterial
                     ref={materialRef}
                     wireframe
@@ -236,8 +236,8 @@ const TechNode = ({ item, position, isHovered, isSelected, isFilteredOut, onHove
 
             const distToCamera = worldPos.distanceTo(camera.position);
 
-            // Core center position in world space
-            const coreWorldPos = new THREE.Vector3(0, -0.18, 0);
+            // Core center position in world space (y = -0.10)
+            const coreWorldPos = new THREE.Vector3(0, -0.10, 0);
             const coreDistToCamera = coreWorldPos.distanceTo(camera.position);
 
             // Is node behind core center?
@@ -336,12 +336,12 @@ const TechNode = ({ item, position, isHovered, isSelected, isFilteredOut, onHove
                         <div
                             className={`w-7 h-7 rounded-full border flex items-center justify-center transition-all duration-300 ease-out bg-black/40 backdrop-blur-sm ${
                                 isHovered || isSelected
-                                    ? 'scale-125 border-white ring-1 ring-white/40'
+                                    ? 'scale-125 border-white ring-1 ring-white/40 shadow-2xl'
                                     : 'border-white/20 hover:border-white/50 scale-100'
                             }`}
                             style={{
                                 borderColor: isHovered || isSelected ? item.color : undefined,
-                                boxShadow: isHovered || isSelected ? `0 0 12px ${item.color}` : undefined,
+                                boxShadow: isHovered || isSelected ? `0 0 16px ${item.color}, 0 0 4px #ffffff` : undefined,
                             }}
                         >
                             {!item.useInline && item.devicon ? (
@@ -375,7 +375,7 @@ const TechNode = ({ item, position, isHovered, isSelected, isFilteredOut, onHove
 
 // Main Scene Component inside Canvas
 const TechScene = ({ selectedCategory, hoveredId, selectedItem, setHoveredId, setSelectedItem }) => {
-    const radius = 1.28;
+    const radius = 1.08; // Optimized sphere radius so top & bottom nodes fit inside container with ZERO cropping
     const orbitalGroupRef = useRef();
     const controlsRef = useRef();
 
@@ -417,8 +417,8 @@ const TechScene = ({ selectedCategory, hoveredId, selectedItem, setHoveredId, se
             <directionalLight position={[10, 10, 10]} intensity={1} />
             <pointLight position={[-10, -10, -10]} intensity={0.4} color="#38bdf8" />
 
-            {/* Orbital Group with slow continuous multi-axis 360-degree rotation */}
-            <group ref={orbitalGroupRef} position={[0, -0.18, 0]} rotation={[0.32, 0, 0.18]}>
+            {/* Orbital Group position centered vertically at y = -0.10 */}
+            <group ref={orbitalGroupRef} position={[0, -0.10, 0]} rotation={[0.32, 0, 0.18]}>
                 {/* Network link edges */}
                 <NetworkEdges
                     nodePositions={nodePositions}
@@ -464,8 +464,34 @@ const TechStack3D = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [hoveredId, setHoveredId] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);
+    const containerRef = useRef(null);
 
     const categories = ['All', 'Frontend', 'Backend', 'Languages', '3D & AI'];
+
+    // Deselect skill when user clicks outside the TechStack section or card anywhere on the window
+    useEffect(() => {
+        if (!selectedItem) return;
+
+        const handleOutsideClick = (e) => {
+            if (containerRef.current && !containerRef.current.contains(e.target)) {
+                setSelectedItem(null);
+            }
+        };
+
+        const timer = setTimeout(() => {
+            window.addEventListener('pointerdown', handleOutsideClick);
+        }, 50);
+
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener('pointerdown', handleOutsideClick);
+        };
+    }, [selectedItem]);
+
+    const handleCategoryClick = (cat) => {
+        setSelectedCategory(cat);
+        setSelectedItem(null); // Deselect skill and return scene to normal
+    };
 
     // Toggle selection: clicking the currently selected skill deselects it, returning model to normal
     const handleNodeClick = (item) => {
@@ -483,8 +509,11 @@ const TechStack3D = () => {
     const isSkillActive = Boolean(hoveredId || selectedItem);
 
     return (
-        <div className="relative w-full h-[290px] sm:h-[320px] rounded-2xl overflow-hidden bg-transparent flex flex-col justify-between p-3 group">
-            {/* Category Filter Pills Container (z-30 when unselected so buttons are 100% clickable; z-10 when skill active) */}
+        <div
+            ref={containerRef}
+            className="relative w-full h-[290px] sm:h-[320px] rounded-2xl overflow-hidden bg-transparent flex flex-col justify-between p-3 group"
+        >
+            {/* Category Filter Pills Container - z-30 when idle, z-10 when skill active so active skill floating badge at z-40 pops ON TOP */}
             <div className={`flex items-center justify-center w-full pointer-events-auto px-1 transition-all duration-300 ease-out ${
                 isSkillActive ? 'z-10' : 'z-30'
             }`}>
@@ -492,8 +521,8 @@ const TechStack3D = () => {
                     {categories.map((cat) => (
                         <button
                             key={cat}
-                            onClick={() => setSelectedCategory(cat)}
-                            className={`px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-lg transition-all duration-200 font-medium text-[8px] sm:text-[9.5px] whitespace-nowrap ${
+                            onClick={() => handleCategoryClick(cat)}
+                            className={`px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-lg transition-all duration-200 font-medium text-[8px] sm:text-[9.5px] whitespace-nowrap cursor-pointer ${
                                 selectedCategory === cat
                                     ? 'bg-white/20 text-white shadow-sm'
                                     : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -505,11 +534,14 @@ const TechStack3D = () => {
                 </div>
             </div>
 
-            {/* 3D Canvas: z-0 when idle; z-40 ONLY when skill hovered/selected with smooth transition */}
+            {/* 3D Canvas: z-0 when idle; z-40 ONLY when skill hovered/selected so active node badge pops OVER category grid */}
             <div className={`absolute inset-0 w-full h-full transition-all duration-500 ease-out scale-100 ${
                 isSkillActive ? 'z-40 pointer-events-auto' : 'z-0 pointer-events-auto'
             }`}>
-                <Canvas camera={{ position: [0, 0, 4.6], fov: 42 }}>
+                <Canvas
+                    camera={{ position: [0, 0, 4.6], fov: 42 }}
+                    onPointerMissed={() => setSelectedItem(null)}
+                >
                     <React.Suspense fallback={<CanvasLoader />}>
                         <TechScene
                             selectedCategory={selectedCategory}
