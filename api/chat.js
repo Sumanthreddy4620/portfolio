@@ -51,7 +51,7 @@ async function retrieveChunks(embedding, matchCount = 4) {
 
 // ── 3. Call Groq LLM with retrieved context ────────────────────────────────
 async function callGroq(systemPrompt, messages) {
-  console.log('   [API] 🚀 Calling Groq API (model: meta-llama/llama-4-scout-17b-16e-instruct)...');
+  console.log('   [API] 🚀 Calling Groq API (model: openai/gpt-oss-120b)...');
   const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -59,7 +59,7 @@ async function callGroq(systemPrompt, messages) {
       'Authorization': `Bearer ${GROQ_API_KEY}`,
     },
     body: JSON.stringify({
-      model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+      model: 'openai/gpt-oss-120b',
       messages: [
         { role: 'system', content: systemPrompt },
         ...messages.map(m => ({ role: m.role, content: m.content })),
@@ -142,7 +142,7 @@ ${context}
 Answer the visitor's question using ONLY the information provided above. If the context doesn't contain the answer, say so honestly.`;
 
     // Step 5: Call Groq
-    console.log('\n5. 🚀 Step 4: LLM Generation (Groq Llama-4 Scout 17B)');
+    console.log('\n5. 🚀 Step 4: LLM Generation (Groq GPT-OSS 120B)');
     const reply = await callGroq(systemPrompt, messages.filter(m => m.role !== 'system'));
 
     console.log('\n6. 💬 Generated Response Snippet:', `"${reply.substring(0, 100).replace(/\n/g, ' ')}..."`);
